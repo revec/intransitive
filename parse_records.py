@@ -103,7 +103,7 @@ if __name__=="__main__":
         records = parse_record_file(f)
 
         records = dict(records)
-        json.dump(records, open("instrinsics_all.json", "w"))
+        json.dump(records, open("intrinsics_all.json", "w"))
 
         sse2 = filter_records(".+sse2", records)
         json.dump(sse2, open("intrinsics_sse2.json", "w"))
