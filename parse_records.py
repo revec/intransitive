@@ -1,6 +1,7 @@
 import json
 import re
 
+import record_utils
 
 #NAME_FILTER = "sse2|avx2"
 TOKEN_DELIMETER_RE = r"\W+|,"
@@ -11,7 +12,7 @@ def intrinsic_name_to_ir(name):
     #       extracted from TableGen.
 
     #m = name.search("((sse|sse2|sse41|sse4a|sse3|ssse3|avx|avx2|avx512)_.+)")
-    m = re.search(r"(x86_(sse2|avx2)_.+)", name)
+    m = re.search(r"(x86_(sse2|avx|avx2)_.+)", name)
     if m:
         name = m.group(1)
 
@@ -94,10 +95,6 @@ def parse_record_file(record_file):
 
     return records
 
-def filter_records(pattern, records):
-    return {key: value for key, value in records.items()
-                       if re.match(pattern, key)}
-
 if __name__=="__main__":
     with open("IntrinsicRecords.td", "r") as f:
         records = parse_record_file(f)
@@ -105,9 +102,12 @@ if __name__=="__main__":
         records = dict(records)
         json.dump(records, open("intrinsics_all.json", "w"))
 
-        sse2 = filter_records(".+sse2", records)
+        sse2 = record_utils.filter_sse2(records)
         json.dump(sse2, open("intrinsics_sse2.json", "w"))
 
-        avx2 = filter_records(".+avx2", records)
+        avx2 = record_utils.filter_avx2(records)
         json.dump(avx2, open("intrinsics_avx2.json", "w"))
+
+        avx = record_utils.filter_avx(records)
+        json.dump(avx, open("intrinsics_avx.json", "w"))
 
