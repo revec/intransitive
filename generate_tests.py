@@ -1,49 +1,51 @@
 import json
+import re
 
 from colorama import Fore, Style
 
 import record_utils
 
-types = {
-    "llvm_i32_ty": "i32",
-}
-
 def get_type(identifier):
-    if identifier in types:
-        return types[identifier]
+    m = re.match(r"llvm_v([0-9]+)([if])([0-9]+)_ty", identifier)
+    if m:
+        width = int(m.group(1))
+        element_type = m.group(2)
+        element_bits = int(m.group(3))
 
-    assert identifier.startswith("llvm_"), "Bad type: {}".format(identifier)
-    assert identifier.endswith("_ty"), "Bad type: {}".format(identifier)
-    identifier = identifier[5:-3]
+        return "<{width} x {element_type}{element_bits}>".format(**locals())
 
-    return identifier
+    m = re.match(r"llvm_([if][0-9]+)_ty", identifier)
+    if m:
+        return m.group(1)
+
+    raise TypeError(Fore.RED + "Bad type: {}".format(identifier) + Style.RESET_ALL)
 
 def make_testbed(intrinsic, properties, width):
     next_reg = 0
 
     testbed = """
 ; ModuleID = 'testbed_{intrinsic}_x{width}'
-target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
+target datalayout = ""
 
 ; Function Attrs: nounwind uwtable
-define i32 @main() local_unnamed_addr #0 {{
+define i32 @main() local_unnamed_addr {{
 """.format(intrinsic=intrinsic, width=width)
+
+    next_register = 1
 
     for i in range(width):
         #%2 = tail call <2 x double> @llvm.x86.sse2.sqrt.pd(<2 x double> <double 0x41E1806340000000, double 0x3FD4C04000000000>)
         out_reg = "out"
         testbed += \
-            "  %{out_reg} = call {out_dtype} @{LLVMFunction}(...);\n".format(
+            "  %{next_register} = call {out_dtype} @{LLVMFunction}(...);\n".format(
+                    next_register=next_register,
                     out_reg=out_reg,
                     out_dtype=get_type(properties["RetTypes"][0]),
                     **properties)
+        next_register += 1
 
-    # TODO: Should the target features +avx,+avx2 be added conditionally?
-    testbed += """}
-
-attributes #0 = { nounwind uwtable "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" }
-    """
+    testbed += "}"
     return testbed
 
 if __name__=="__main__":
