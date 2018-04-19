@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
+
 import argparse
-import binascii
 import json
 import os
 import random
