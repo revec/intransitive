@@ -4,8 +4,11 @@ import argparse
 from collections import defaultdict, namedtuple
 import itertools
 import json
+import math
 import os
 import re
+
+from colorama import Fore, Style
 
 from utilities import Combination
 
@@ -58,6 +61,100 @@ def refine_equivalences(equivalences, candidate_equivalences):
                 equivalences[instruction] = set(candidate_set)
 
 
+def filter_ucomi(conversions):
+    """Filter out false equivalences between sse2.comi... and sse2.ucomi...
+
+    The intrinsics sse2.comi<lt/le/gt/ge> and see2.ucomi<lt/le/gt/ge> have different exception handing behavior.
+    """
+    for pair in conversions:
+        m = re.match("int_x86_(sse|sse2|avx|avx2)_(u?)comi", pair[0].id)
+        if m:
+            if m.group(2) == "u" and re.match("int_x86_{}_comi".format(m.group(1)), pair[1].id):
+                continue
+            elif m.group(2) == "" and re.match("int_x86_{}_ucomi".format(m.group(1)), pair[1].id):
+                continue
+
+        yield pair
+
+
+def filter_high_repetitions(conversions):
+    """Simplify conversions
+    
+    Example: don't convert 4x sse2 into 2x avx2, if a 2x sse2 to 1x avx2 conversion is available.
+    """
+    conversions = set(conversions)
+    simple_conversions = set()
+
+    for conversion in conversions:
+        repeat_0 = conversion[0].repeat
+        repeat_1 = conversion[1].repeat
+        gcd = math.gcd(repeat_0, repeat_1)
+        if gcd > 1:
+            simple_conversion = (
+                Configuration(id=conversion[0].id,
+                              combination=conversion[0].combination,
+                              repeat=(repeat_0 // gcd)),
+                Configuration(id=conversion[1].id,
+                              combination=conversion[1].combination,
+                              repeat=(repeat_1 // gcd))
+            )
+
+            if simple_conversion not in conversions:
+                # Simplified conversion not found as a match - include this conversion
+                simple_conversions.add(conversion)
+        else:
+            # Simplist conversion available
+            simple_conversions.add(conversion)
+
+    return simple_conversions
+
+
+def order_pairs(conversions):
+    """Order conversion tuples: (source_config, target_config)"""
+    for conversion in conversions:
+        a, b = conversion
+
+        # Heuristic: Consolidate repeated intrinsics
+        if a.repeat > b.repeat:
+            yield conversion
+        elif a.repeat < b.repeat:
+            yield (b, a)
+        else:
+            print("{}Unclear conversion direction for intrinsics:\n  {}\n  {}{}"
+                  .format(Fore.YELLOW, a, b, Style.RESET_ALL))
+
+        ## Determine the source and target vector instruction set
+        #m_a = re.match("int_x86_([a-z0-9]+)_(.+)", a.id)
+        #m_b = re.match("int_x86_([a-z0-9]+)_(.+)", b.id)
+
+        #if m_a and m_b:
+        #    set_a = m_a.group(1)
+        #    set_b = m_b.group(1)
+        #    instr_a = m_a.group(2)
+        #    instr_b = m_b.group(2)
+
+        #    # Heuristic: convert high repetition intrinsics into low
+        #    # repetition intrinsics
+
+        #    if set_a.startswith("avx") and set_b.startswith("sse"):
+        #        # Flip order, convert from SSE(2) to AVX(2)
+        #        yield (b, a)
+        #    elif set_a.startswith("sse") and set_b.startswith("avx"):
+        #        yield conversion
+        #    else:
+        #        print("{}Unclear conversion direction for intrinsics:\n  {}\n  {}{}"
+        #             .format(Fore.YELLOW, a, b, Style.RESET_ALL))
+
+        #        # Sort lexicographically
+        #        if instr_a <= instr_b:
+        #            yield conversion
+        #        else:
+        #            yield (b, a)
+        #else:
+        #    raise TypeError("Malformed intrinsic ids. Cannot match to vector intrinsic set: {}, {}".format(a, b))
+        #    yield conversion
+
+
 def recommend_conversions(equivalence_lists):
     pairs = []
 
@@ -97,22 +194,19 @@ def recommend_conversions(equivalence_lists):
 
             deduplicated.add(config)
 
-        if (len(deduplicated) > 6):
-            print(len(deduplicated), deduplicated)
+        #if (len(deduplicated) > 6):
+        #    print(len(deduplicated), deduplicated)
 
         if (len(deduplicated) > 1):
             combinations = itertools.combinations(deduplicated, 2)
             pairs.extend(combinations)
 
-    for pair in pairs:
-        m = re.match("int_x86_(sse|sse2|avx|avx2)_(u?)comi", pair[0].id)
-        if m:
-            if m.group(2) == "u" and re.match("int_x86_{}_comi".format(m.group(1)), pair[1].id):
-                continue
-            elif m.group(2) == "" and re.match("int_x86_{}_ucomi".format(m.group(1)), pair[1].id):
-                continue
-
-        yield pair
+    # Filter out some semantically different instructions
+    pairs = filter_ucomi(pairs)
+    
+    pairs = order_pairs(pairs)
+    pairs = filter_high_repetitions(pairs)
+    return pairs
 
 
 def serialize_conversions(conversions, fp):
@@ -164,7 +258,8 @@ if __name__=="__main__":
     json.dump(missed_list,
               open(os.path.join(args.output_folder, "test_missed.json"), "w"))
 
-    conversions = recommend_conversions(equivalence_lists)
+    conversions = list(recommend_conversions(equivalence_lists))
+    print("Found {} conversions".format(len(conversions)))
     with open(os.path.join(args.output_folder, "test_conversions.json"), "w") as conversions_f:
         serialize_conversions(conversions, conversions_f)
 

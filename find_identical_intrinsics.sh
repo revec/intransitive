@@ -2,7 +2,7 @@
 
 set -ex
 
-./find_identical_intrinsics.py --log logs/testbeds_seed*.log --output-folder logs/
+./find_identical_intrinsics.py --log logs/testbeds_*.log --output-folder logs/
 
 # Format output JSON
 cat logs/test_missed.json | jq "." |& tee logs/test_missed.json > /dev/null

@@ -2,6 +2,7 @@
 
 import argparse
 import enum
+import itertools
 import json
 import os
 import random
@@ -16,12 +17,31 @@ import record_utils
 from utilities import type_to_format, Combination, get_type
 
 parser = argparse.ArgumentParser(description="Generate testbeds for intrinsic equality testing")
-parser.add_argument("--seed", type=int, required=True,
+parser.add_argument("--seed", type=int, required=False,
                     help="Seed for the input generator")
+parser.add_argument("--test-index", type=int, required=False, default=0,
+                    help="Index of generated test (made of specific byte chunks)")
 parser.add_argument("--max-bits", type=int, default=768,
                     help="Maximum number of bits to generate for inputs")
 #parser.add_argument("--shuffle-input", type=int, default=0x000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F02122232425262728292A2B2C2D2E2F303132333435363738393A3B3C3D3E3F404142434445464748494A4B4C4D4E4F505152535455565758595A5B5C5D5E5F)
 args = parser.parse_args()
+
+test_byte_chunks = [
+    "00" * 8,
+    "10" * 8,
+    "ff" * 8,
+]
+
+def combine_test_input_chunks(num_bytes, test_index):
+    """Generate a test"""
+    combinations = itertools.combinations_with_replacement(test_byte_chunks, num_bytes // 8)
+
+    for i, chunks in enumerate(combinations):
+        if i == test_index:
+            hex_string = "".join(chunks)
+            return int(hex_string, 16)
+
+    raise IndexError("Test index {} out of range (range: 0-{})".format(test_index, i))
 
 def random_bytes(num_bytes, seed):
     random.seed(seed)
@@ -242,7 +262,7 @@ def generate_store_testbed(intrinsic, properties, n_input_bits, inputs):
     max_num_repeat = n_input_bits // total_param_bits
 
     for num_repeat in range(1, max_num_repeat + 1):
-        for combination in Combination:
+        for combination in (Combination.CONSECUTIVE, Combination.INTERLEAVED):
             testbed = make_testbed(
                         intrinsic, properties, n_input_bits, inputs,
                         num_repeat=num_repeat,
@@ -268,12 +288,17 @@ if __name__=="__main__":
         intrinsics = json.load(intrinsics_file)
         intel_vector = record_utils.filter_intel_vector(intrinsics)
 
-    inputs = random_bytes(args.max_bits // 8, args.seed)
+    num_input_bytes = args.max_bits // 8
+
+    if args.seed:
+        inputs = random_bytes(num_input_bytes, args.seed)
+    else:
+        inputs = combine_test_input_chunks(num_input_bytes, args.test_index)
 
     for intrinsic in sorted(intel_vector.keys()):
         properties = intel_vector[intrinsic]
-        generate_store_testbed(intrinsic, properties, args.max_bits, inputs)
-
-    # TODO: Compile testbeds with llc
-
+        generate_store_testbed(intrinsic=intrinsic,
+                               properties=properties,
+                               n_input_bits=args.max_bits,
+                               inputs=inputs)
 
