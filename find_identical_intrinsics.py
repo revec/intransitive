@@ -123,37 +123,6 @@ def order_pairs(conversions):
             print("{}Unclear conversion direction for intrinsics:\n  {}\n  {}{}"
                   .format(Fore.YELLOW, a, b, Style.RESET_ALL))
 
-        ## Determine the source and target vector instruction set
-        #m_a = re.match("int_x86_([a-z0-9]+)_(.+)", a.id)
-        #m_b = re.match("int_x86_([a-z0-9]+)_(.+)", b.id)
-
-        #if m_a and m_b:
-        #    set_a = m_a.group(1)
-        #    set_b = m_b.group(1)
-        #    instr_a = m_a.group(2)
-        #    instr_b = m_b.group(2)
-
-        #    # Heuristic: convert high repetition intrinsics into low
-        #    # repetition intrinsics
-
-        #    if set_a.startswith("avx") and set_b.startswith("sse"):
-        #        # Flip order, convert from SSE(2) to AVX(2)
-        #        yield (b, a)
-        #    elif set_a.startswith("sse") and set_b.startswith("avx"):
-        #        yield conversion
-        #    else:
-        #        print("{}Unclear conversion direction for intrinsics:\n  {}\n  {}{}"
-        #             .format(Fore.YELLOW, a, b, Style.RESET_ALL))
-
-        #        # Sort lexicographically
-        #        if instr_a <= instr_b:
-        #            yield conversion
-        #        else:
-        #            yield (b, a)
-        #else:
-        #    raise TypeError("Malformed intrinsic ids. Cannot match to vector intrinsic set: {}, {}".format(a, b))
-        #    yield conversion
-
 
 def recommend_conversions(equivalence_lists):
     pairs = []
@@ -194,10 +163,7 @@ def recommend_conversions(equivalence_lists):
 
             deduplicated.add(config)
 
-        #if (len(deduplicated) > 6):
-        #    print(len(deduplicated), deduplicated)
-
-        if (len(deduplicated) > 1):
+        if len(deduplicated) > 1:
             combinations = itertools.combinations(deduplicated, 2)
             pairs.extend(combinations)
 
@@ -235,12 +201,13 @@ if __name__=="__main__":
             print(log_path, total)
             refine_equivalences(equivalences, common_outputs.values())
 
+    # Remove duplicate equivalence sets
     equivalences_dedup = set()
     for equiv_set in equivalences.values():
         equiv_set = frozenset(equiv_set)
         equivalences_dedup.add(equiv_set)
 
-    # Write equivalences to a JSON file
+    # Convert sets into lists, find missed instructions
     equivalence_lists = []
     missed_list = []
     for equiv_set in equivalences_dedup:
@@ -252,14 +219,17 @@ if __name__=="__main__":
             missed_list.extend(list(equiv_set))
     missed_list.sort()
 
-    json.dump(equivalence_lists,
-              open(os.path.join(args.output_folder, "test_equivalences.json"), "w"))
+    # Write equivalences to a JSON file
+    with open(os.path.join(args.output_folder, "test_equivalences.json"), "w") as equiv_f:
+        json.dump(equivalence_lists, equiv_f)
 
-    json.dump(missed_list,
-              open(os.path.join(args.output_folder, "test_missed.json"), "w"))
+    with open(os.path.join(args.output_folder, "test_missed.json"), "w") as missed_f:
+        json.dump(missed_list, missed_f)
 
+    # Find pairs of conversions from lists of equivalent intrinsics
     conversions = list(recommend_conversions(equivalence_lists))
     print("Found {} conversions".format(len(conversions)))
+
     with open(os.path.join(args.output_folder, "test_conversions.json"), "w") as conversions_f:
         serialize_conversions(conversions, conversions_f)
 
