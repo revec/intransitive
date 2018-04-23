@@ -2,6 +2,7 @@
 
 import argparse
 from collections import defaultdict, namedtuple
+import difflib
 import itertools
 import json
 import math
@@ -79,7 +80,7 @@ def filter_ucomi(conversions):
 
 def filter_high_repetitions(conversions):
     """Simplify conversions
-    
+
     Example: don't convert 4x sse2 into 2x avx2, if a 2x sse2 to 1x avx2 conversion is available.
     """
     conversions = set(conversions)
@@ -103,7 +104,7 @@ def filter_high_repetitions(conversions):
                 # Simplified conversion not found as a match - include this conversion
                 simple_conversions.add(conversion)
         else:
-            # Simplist conversion available
+            # Simplest conversion available
             simple_conversions.add(conversion)
 
     return simple_conversions
@@ -120,7 +121,7 @@ def order_pairs(conversions):
         elif a.repeat < b.repeat:
             yield (b, a)
         else:
-            print("{}Unclear conversion direction for intrinsics:\n  {}\n  {}{}"
+            print("{}Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}{}"
                   .format(Fore.YELLOW, a, b, Style.RESET_ALL))
 
 
@@ -132,10 +133,48 @@ def order_pairs(conversions):
 #    return conversions
 
 
+def pick_target(base_configuration, targets):
+    """Given one or more target conversion candidates, pick one"""
+    assert(len(targets))
+
+    if len(targets) == 1:
+        return targets[0]
+
+    # TODO: Need a better way to choose out of duplicates
+    for target in targets:
+        # Select target configuration that has a name that extends the base
+        # E.g. int_x86_avx2_psllv_d and int_x86_avx2_psllv_d_256
+        if target.id.startswith(base_configuration.id):
+            return target
+
+        #m = re.match("int_x86_([a-z0-9]+)_(.+)$", base_configuration.id)
+        #if m and re.match("int_x86_([a-z0-9]+)_{}", m.group(2)):
+        #    return target
+
+    # Select target that has the most similar id/name
+    possible_ids = [config.id for config in targets]
+    match = difflib.get_close_matches(base_configuration.id, possible_ids, n=1, cutoff=0)[0]
+    target = targets[possible_ids.index(match)]
+    print("{}Multiple target conversions ({}), picking similar ID:\n  base:   {}\n  target: {}{}"
+                  .format(Fore.YELLOW, len(targets), base_configuration, target, Style.RESET_ALL))
+    return target
+
+
 def remove_duplicate_targets(conversions):
     """If multiple conversions are possible for an intrinsic configuration, choose one, or skip"""
-    # TODO
-    return conversions
+    conversion_map = {}
+
+    for conversion in conversions:
+        base, target = conversion
+
+        if base not in conversion_map:
+            conversion_map[base] = [target]
+        else:
+            conversion_map[base].append(target)
+
+    for base, targets in conversion_map.items():
+        target = pick_target(base, targets)
+        yield (base, target)
 
 
 def recommend_conversions(equivalence_lists):
