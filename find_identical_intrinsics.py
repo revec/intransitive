@@ -124,6 +124,20 @@ def order_pairs(conversions):
                   .format(Fore.YELLOW, a, b, Style.RESET_ALL))
 
 
+#def filter_differing_arguments(conversions):
+#    with open("intrinsics_all.json", "r") as intrinsics_f:
+#        intrinsics = json.load(intrinsics_f)
+#        # TODO
+#
+#    return conversions
+
+
+def remove_duplicate_targets(conversions):
+    """If multiple conversions are possible for an intrinsic configuration, choose one, or skip"""
+    # TODO
+    return conversions
+
+
 def recommend_conversions(equivalence_lists):
     pairs = []
 
@@ -169,9 +183,10 @@ def recommend_conversions(equivalence_lists):
 
     # Filter out some semantically different instructions
     pairs = filter_ucomi(pairs)
-    
     pairs = order_pairs(pairs)
     pairs = filter_high_repetitions(pairs)
+    #pairs = filter_differing_arguments(pairs)
+    pairs = remove_duplicate_targets(pairs)
     return pairs
 
 

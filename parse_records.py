@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 import re
 
@@ -5,18 +7,6 @@ import record_utils
 
 #NAME_FILTER = "sse2|avx2"
 TOKEN_DELIMETER_RE = r"\W+|,"
-
-def intrinsic_name_to_ir(name):
-    # TODO: This is a hacky conversion that is specific to the
-    #       format of vector intrinsics. It should ideally be
-    #       extracted from TableGen.
-
-    #m = name.search("((sse|sse2|sse41|sse4a|sse3|ssse3|avx|avx2|avx512)_.+)")
-    m = re.search(r"(x86_(sse2|avx|avx2)_.+)", name)
-    if m:
-        name = m.group(1)
-
-    return "llvm." + ".".join(name.split("_"))
 
 def parse_value(raw_value):
     raw_value = raw_value.strip()
@@ -60,7 +50,7 @@ def parse_property(line):
 
 def parse_record(record_text):
     record_name = record_text[0].split(" ")[1]
-    record_name_ir = intrinsic_name_to_ir(record_name)
+    record_name_ir = record_utils.intrinsic_name_to_ir(record_name)
 
     properties = {}
     for property_line in record_text[1:-1]:

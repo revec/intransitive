@@ -10,6 +10,7 @@ import re
 import struct
 import sys
 import time
+import traceback
 
 from colorama import Fore, Style
 
@@ -263,23 +264,23 @@ def generate_store_testbed(intrinsic, properties, n_input_bits, inputs):
 
     for num_repeat in range(1, max_num_repeat + 1):
         for combination in (Combination.CONSECUTIVE, Combination.INTERLEAVED):
-            testbed = make_testbed(
-                        intrinsic, properties, n_input_bits, inputs,
-                        num_repeat=num_repeat,
-                        combination=combination)
+            try:
+                testbed = make_testbed(
+                            intrinsic, properties, n_input_bits, inputs,
+                            num_repeat=num_repeat,
+                            combination=combination)
+ 
+                intrinsic_folder = os.path.join("tests", intrinsic, "combo_{}".format(combination.name), "repeat_{}".format(num_repeat))
+                os.makedirs(intrinsic_folder, exist_ok=True)
 
-            #print("===============")
-            #print(intrinsic)
-            #print(properties)
+                with open(os.path.join(intrinsic_folder, "properties.json"), "w") as properties_file:
+                    json.dump(properties, properties_file)
 
-            intrinsic_folder = os.path.join("tests", intrinsic, "combo_{}".format(combination.name), "repeat_{}".format(num_repeat))
-            os.makedirs(intrinsic_folder, exist_ok=True)
-
-            with open(os.path.join(intrinsic_folder, "properties.json"), "w") as properties_file:
-                json.dump(properties, properties_file)
-
-            with open(os.path.join(intrinsic_folder, "testbed.ll"), "w") as testbed_file:
-                testbed_file.write(testbed)
+                with open(os.path.join(intrinsic_folder, "testbed.ll"), "w") as testbed_file:
+                    testbed_file.write(testbed)
+            except TypeError as e:
+                print(e)
+                # traceback.print_exc()
 
 if __name__=="__main__":
     intel_vector = {}
