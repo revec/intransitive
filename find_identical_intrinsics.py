@@ -147,10 +147,6 @@ def pick_target(base_configuration, targets):
         if target.id.startswith(base_configuration.id):
             return target
 
-        #m = re.match("int_x86_([a-z0-9]+)_(.+)$", base_configuration.id)
-        #if m and re.match("int_x86_([a-z0-9]+)_{}", m.group(2)):
-        #    return target
-
     # Select target that has the most similar id/name
     possible_ids = [config.id for config in targets]
     match = difflib.get_close_matches(base_configuration.id, possible_ids, n=1, cutoff=0)[0]
