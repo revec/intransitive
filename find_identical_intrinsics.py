@@ -7,6 +7,7 @@ import itertools
 import json
 import math
 import os
+from pprint import pprint
 import re
 
 from colorama import Fore, Style
@@ -20,7 +21,34 @@ parser.add_argument("--output-folder", type=str, required=True,
                     help="Folder in which to log equivalences")
 args = parser.parse_args()
 
-Configuration = namedtuple("Configuration", ["id", "combination", "repeat"])
+
+class Configuration(object):
+    def __init__(self, id, combination, repeat):
+        self.id = id
+        self.combination = combination
+        self.repeat = repeat
+
+        parts = self.id.split("_")
+        self.architecture = parts[1]
+        self.instruction_set = parts[2]
+        self.operation = "_".join(parts[3:])
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "combination": self.combination,
+            "repeat": self.repeat,
+        }
+
+    def __str__(self):
+        return "Conf({id}, {combination}, {repeat})".format(
+                id=self.id,
+                combination=self.combination,
+                repeat=self.repeat)
+
+    def __repr__(self):
+        return str(self)
+
 
 def find_common_outputs(log_file):
     test_outputs = []
@@ -140,9 +168,31 @@ def pick_target(base_configuration, targets):
     if len(targets) == 1:
         return targets[0]
 
+    print("Multiple targets for {}".format(base_configuration))
+
+
+    # Build an index from instruction set (eg "avx2") to target configurations
+    targets_by_instruction_set = defaultdict(list)
+    for target in targets:
+        targets_by_instruction_set[target.instruction_set].append(target)
+    targets_by_instruction_set = dict(targets_by_instruction_set)
+
+    pprint(targets_by_instruction_set)
+
+    for instruction_set, configurations in targets_by_instruction_set.items():
+        # Maximize the vectorization factor
+        min_repeat = min(configurations, key=lambda conf: conf.repeat)
+        configurations = filter(lambda conf: conf.repeat == min_repat, configurations)
+
+        # Select target configuration that has a name that extends the base
+
+        targets_by_instruction_set[instruction_set] = configurations
+
+    #return targets_by_instruction_set
+
+
     # TODO: Need a better way to choose out of duplicates
     for target in targets:
-        # Select target configuration that has a name that extends the base
         # E.g. int_x86_avx2_psllv_d and int_x86_avx2_psllv_d_256
         if target.id.startswith(base_configuration.id):
             return target
@@ -196,13 +246,13 @@ def recommend_conversions(equivalence_lists):
         # Filter out unnecessary pairs
         deduplicated = set()
         for config in configurations:
-            if config.combination == Combination.CONSECUTIVE:
+            if config.combination == Combination.HORIZONTAL:
                 alt_config = Configuration(id=config.id,
-                                           combination=Combination.INTERLEAVED,
+                                           combination=Combination.VERTICAL,
                                            repeat=config.repeat)
-            elif config.combination == Combination.INTERLEAVED:
+            elif config.combination == Combination.VERTICAL:
                 alt_config = Configuration(id=config.id,
-                                           combination=Combination.CONSECUTIVE,
+                                           combination=Combination.HORIZONTAL,
                                            repeat=config.repeat)
 
             if alt_config in configurations:
@@ -231,7 +281,7 @@ def serialize_conversions(conversions, fp):
     for conversion in conversions:
         conversion_dicts = []
         for config in conversion:
-            config_dict = dict(config._asdict())
+            config_dict = dict(config.to_dict())
             config_dict["combination"] = config_dict["combination"].name
             conversion_dicts.append(config_dict)
         conversions_serializable.append(conversion_dicts)
@@ -242,6 +292,9 @@ if __name__=="__main__":
     # Generate equality candidates from input test log files
 
     equivalences = {}
+
+    # DEBUG:
+    args.log = args.log[:25]
 
     # Build & refine equivalence set by candidates from test logs
     for log_path in args.log:

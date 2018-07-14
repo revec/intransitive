@@ -13,8 +13,8 @@ type_to_format = {
 }
 
 class Combination(enum.Enum):
-    CONSECUTIVE = 1
-    INTERLEAVED = 2
+    HORIZONTAL = 1
+    VERTICAL = 2
     ANY = 3
 
 def get_type(identifier):

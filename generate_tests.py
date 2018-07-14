@@ -18,8 +18,8 @@ import record_utils
 from utilities import type_to_format, Combination, get_type
 
 parser = argparse.ArgumentParser(description="Generate testbeds for intrinsic equality testing")
-parser.add_argument("--seed", type=int, required=False,
-                    help="Seed for the input generator")
+parser.add_argument("--seed", type=int, required=False, default=0,
+                    help="Seed for the input generator. The default of 0 indicates that edge cases should be generated.")
 parser.add_argument("--test-index", type=int, required=False, default=0,
                     help="Index of generated test (made of specific byte chunks)")
 parser.add_argument("--max-bits", type=int, default=768,
@@ -70,20 +70,13 @@ def make_testbed(intrinsic, properties, n_input_bits, inputs, num_repeat, combin
     next_register = 1
 
     # Header and method signature
-    testbed = """
-; ModuleID = 'testbed_{intrinsic}_combo{combination}_repeat{num_repeat}'
-target triple = "x86_64-pc-linux-gnu"
-target datalayout = ""
-
-; Function Attrs: nounwind uwtable
-define i32 @main() local_unnamed_addr {{
-""".format(intrinsic=intrinsic, combination=combination.name, num_repeat=num_repeat)
+    main_body = ""
 
     # Allocate memory for outputs
     out_mem_ptrs = []
     for i in range(num_repeat):
         out_mem_ptrs.append(next_register)
-        testbed += "  %{} = alloca {}, align {}\n".format(
+        main_body += "  %{} = alloca {}, align {}\n".format(
                 next_register, out_dtype, out_alignment)
         next_register += 1
 
@@ -92,7 +85,7 @@ define i32 @main() local_unnamed_addr {{
     param_constants = [[0 for j in range(num_params)]
                     for i in range(num_repeat)]
 
-    if combination == Combination.INTERLEAVED:
+    if combination == Combination.VERTICAL:
         # Populate the constants table column first.
         # That is, assign the first parameter of each instruction first, then the
         # second of each, etc.
@@ -107,7 +100,7 @@ define i32 @main() local_unnamed_addr {{
                 constant = inputs & mask
                 inputs = inputs >> param_total_bits
                 param_constants[i][j] = (param_type_id, constant)
-    elif combination == Combination.CONSECUTIVE:
+    elif combination == Combination.HORIZONTAL:
         # Populate the constants table row first.
         # That is, assign all the parameters of the first instruction first, then all the parameters of the second, etc.
         for i in range(num_repeat):
@@ -159,7 +152,7 @@ define i32 @main() local_unnamed_addr {{
             params.append("{} <{}>".format(param_type, ", ".join(element_constants)))
         param_string = ", ".join(params)
 
-        testbed += \
+        main_body += \
             "  %{next_register} = call {out_dtype} @{LLVMFunction}({params})\n".format(
                     next_register=next_register,
                     out_dtype=out_dtype,
@@ -167,22 +160,21 @@ define i32 @main() local_unnamed_addr {{
                     **properties)
         next_register += 1
 
-        testbed += "  store {dtype} %{out_reg}, {dtype}* %{out_mem_ptr}, align {align}\n".format(
+        main_body += "  store {dtype} %{out_reg}, {dtype}* %{out_mem_ptr}, align {align}\n".format(
                 dtype=out_dtype,
                 out_reg=next_register - 1,
                 out_mem_ptr=out_mem_ptrs[i],
                 align=out_alignment)
 
     for i in range(num_repeat):
-        testbed += "  %{} = bitcast {}* %{} to i8*\n".format(
+        main_body += "  %{} = bitcast {}* %{} to i8*\n".format(
                 next_register, out_dtype, out_mem_ptrs[i])
         next_register += 1
 
-        testbed += "  call void @print_bytes(i8* %{}, i64 {})\n".format(
+        main_body += "  call void @print_bytes(i8* %{}, i64 {})\n".format(
                 next_register - 1, out_alignment)
 
-    testbed += "  ret i32 0\n"
-    testbed += "}"
+    main_body += "  ret i32 0\n"
 
     # Declare stubs for intrinsics, printing
     params = []
@@ -190,7 +182,10 @@ define i32 @main() local_unnamed_addr {{
         param_type, param_width, param_element_type, param_element_bits = get_type(param_type_id)
         params.append(param_type)
     param_string = ", ".join(params)
-    testbed += """\n
+    testbed = """; ModuleID = 'testbed_{param_intrinsic}_combo{combination}_repeat{num_repeat}'
+target triple = "x86_64-pc-linux-gnu"
+target datalayout = ""
+
 @.str = private unnamed_addr constant [5 x i8] c"%02x\00", align 1
 
 ; Function Attrs: noinline nounwind uwtable
@@ -219,8 +214,13 @@ declare i32 @printf(i8* nocapture readonly, ...) local_unnamed_addr #1
 ; Function Attrs: nounwind
 declare i32 @putchar(i32) local_unnamed_addr #2
 
-; Function Attrs: nounwind readnone
-declare {rtype} @{intrinsic}({ptypes}) #3
+; Function Attrs: nounwind
+declare {rtype} @{intrinsic}({ptypes}) local_unnamed_addr #3
+
+; Function Attrs: nounwind uwtable
+define i32 @main() local_unnamed_addr {{
+{main_body}
+}}
 
 attributes #0 = {{ noinline nounwind uwtable }}
 attributes #1 = {{ argmemonly nounwind }}
@@ -230,6 +230,10 @@ attributes #3 = {{ nounwind readnone }}
 !2 = !{{!3, !3, i64 0}}
 !3 = !{{!"omnipotent char", !4, i64 0}}
 !4 = !{{!"Simple C/C++ TBAA"}}""".format(
+        param_intrinsic=intrinsic,
+        combination=combination.name,
+        num_repeat=num_repeat,
+        main_body=main_body,
         rtype=out_dtype,
         intrinsic=properties["LLVMFunction"],
         ptypes=param_string)
@@ -263,13 +267,13 @@ def generate_store_testbed(intrinsic, properties, n_input_bits, inputs):
     max_num_repeat = n_input_bits // total_param_bits
 
     for num_repeat in range(1, max_num_repeat + 1):
-        for combination in (Combination.CONSECUTIVE, Combination.INTERLEAVED):
+        for combination in (Combination.HORIZONTAL, Combination.VERTICAL):
             try:
                 testbed = make_testbed(
                             intrinsic, properties, n_input_bits, inputs,
                             num_repeat=num_repeat,
                             combination=combination)
- 
+
                 intrinsic_folder = os.path.join("tests", intrinsic, "combo_{}".format(combination.name), "repeat_{}".format(num_repeat))
                 os.makedirs(intrinsic_folder, exist_ok=True)
 

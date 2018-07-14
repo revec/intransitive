@@ -17,7 +17,7 @@ intel_vector_sets = [
     "avx",
     "avx2",
     "fma",
-    #"avx512",
+    "avx512",
     #"3dnow",
     #"3dnowa",
     #"mmx",
