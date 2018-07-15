@@ -5,14 +5,24 @@ from collections import defaultdict, namedtuple
 import difflib
 import itertools
 import json
+import logging
 import math
 import os
 from pprint import pprint
 import re
 
+import coloredlogs
 from colorama import Fore, Style
+import Levenshtein
 
-from utilities import Combination
+from IPython import embed
+import pdb
+
+from utilities import Combination, get_type
+
+coloredlogs.install()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 parser = argparse.ArgumentParser(description="Find identical intrinsics")
 parser.add_argument("--log", type=str, nargs="+",
@@ -48,6 +58,12 @@ class Configuration(object):
 
     def __repr__(self):
         return str(self)
+
+    def __hash__(self):
+        return hash((self.id, self.combination, self.repeat))
+    
+    def __eq__(self, other):
+        return self.id == other.id and self.combination == other.combination and self.repeat == other.repeat
 
 
 def find_common_outputs(log_file):
@@ -96,11 +112,11 @@ def filter_ucomi(conversions):
     The intrinsics sse2.comi<lt/le/gt/ge> and see2.ucomi<lt/le/gt/ge> have different exception handing behavior.
     """
     for pair in conversions:
-        m = re.match("int_x86_(sse|sse2|avx|avx2)_(u?)comi", pair[0].id)
+        m = re.match("int_x86_([a-z0-9]+)_(u?)comi", pair[0].id)
         if m:
-            if m.group(2) == "u" and re.match("int_x86_{}_comi".format(m.group(1)), pair[1].id):
+            if m.group(2) == "u" and re.match("int_x86_([a-z0-9]+)_comi", pair[1].id):
                 continue
-            elif m.group(2) == "" and re.match("int_x86_{}_ucomi".format(m.group(1)), pair[1].id):
+            elif m.group(2) == "" and re.match("int_x86_([a-z0-9]+)_ucomi", pair[1].id):
                 continue
 
         yield pair
@@ -118,6 +134,7 @@ def filter_high_repetitions(conversions):
         repeat_0 = conversion[0].repeat
         repeat_1 = conversion[1].repeat
         gcd = math.gcd(repeat_0, repeat_1)
+
         if gcd > 1:
             simple_conversion = (
                 Configuration(id=conversion[0].id,
@@ -128,9 +145,8 @@ def filter_high_repetitions(conversions):
                               repeat=(repeat_1 // gcd))
             )
 
-            if simple_conversion not in conversions:
-                # Simplified conversion not found as a match - include this conversion
-                simple_conversions.add(conversion)
+            # Add the reduced conversion, if it doesn't exist
+            simple_conversions.add(simple_conversion)
         else:
             # Simplest conversion available
             simple_conversions.add(conversion)
@@ -140,97 +156,90 @@ def filter_high_repetitions(conversions):
 
 def order_pairs(conversions):
     """Order conversion tuples: (source_config, target_config)"""
+    ordered_instruction_sets = ["sse", "sse2", "sse3", "sse41", "avx", "avx2", "fma", "avx512"]
+
     for conversion in conversions:
         a, b = conversion
 
+        VF = a.repeat / b.repeat
+        power = ordered_instruction_sets.index(b.instruction_set) - ordered_instruction_sets.index(a.instruction_set)
+
         # Heuristic: Consolidate repeated intrinsics
-        if a.repeat > b.repeat:
+        if VF > 1:
             yield conversion
-        elif a.repeat < b.repeat:
+        elif VF < 1:
             yield (b, a)
-        else:
-            print("{}Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}{}"
-                  .format(Fore.YELLOW, a, b, Style.RESET_ALL))
+        elif a.id != b.id:
+            if power > 0:
+                yield conversion
+            elif power < 0:
+                yield conversion
+            else:
+                logger.warn("Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}".format(a, b))
 
 
-#def filter_differing_arguments(conversions):
-#    with open("intrinsics_all.json", "r") as intrinsics_f:
-#        intrinsics = json.load(intrinsics_f)
-#        # TODO
-#
-#    return conversions
+def filter_differing_arguments(conversions):
+    with open("intrinsics_all.json", "r") as intrinsics_f:
+        intrinsics = json.load(intrinsics_f)
+
+    for conversion in conversions:
+        params0 = intrinsics[conversion[0].id]["ParamTypes"]
+        params1 = intrinsics[conversion[1].id]["ParamTypes"]
+
+        if len(params0) == len(params1):
+            element_types0 = tuple(map(lambda ty: get_type(ty)[2], params0))
+            element_types1 = tuple(map(lambda ty: get_type(ty)[2], params1))
+
+            if element_types0 == element_types1:
+                yield conversion
 
 
 def pick_target(base_configuration, targets):
-    """Given one or more target conversion candidates, pick one"""
-    assert(len(targets))
+    """Given one or more target conversion candidates of the same instruction set, pick one"""
+    assert len(targets)
 
-    if len(targets) == 1:
-        return targets[0]
+    # Maximize the vectorization factor
+    min_repeat = min(map(lambda conf: conf.repeat, targets))
+    targets = filter(lambda conf: conf.repeat == min_repeat, targets)
 
-    print("Multiple targets for {}".format(base_configuration))
+    # Select targets with the most similar operation names
+    distances = {conf: Levenshtein.distance(base_configuration.operation, conf.operation) for conf in targets}
+    min_distance = min(distances.values())
+    targets = [conf for conf, distance in distances.items() if distance == min_distance]
 
-
-    # Build an index from instruction set (eg "avx2") to target configurations
-    targets_by_instruction_set = defaultdict(list)
-    for target in targets:
-        targets_by_instruction_set[target.instruction_set].append(target)
-    targets_by_instruction_set = dict(targets_by_instruction_set)
-
-    pprint(targets_by_instruction_set)
-
-    for instruction_set, configurations in targets_by_instruction_set.items():
-        # Maximize the vectorization factor
-        min_repeat = min(configurations, key=lambda conf: conf.repeat)
-        configurations = filter(lambda conf: conf.repeat == min_repat, configurations)
-
-        # Select target configuration that has a name that extends the base
-
-        targets_by_instruction_set[instruction_set] = configurations
-
-    #return targets_by_instruction_set
-
-
-    # TODO: Need a better way to choose out of duplicates
-    for target in targets:
-        # E.g. int_x86_avx2_psllv_d and int_x86_avx2_psllv_d_256
-        if target.id.startswith(base_configuration.id):
-            return target
-
-    # Select target that has the most similar id/name
-    possible_ids = [config.id for config in targets]
-    match = difflib.get_close_matches(base_configuration.id, possible_ids, n=1, cutoff=0)[0]
-    target = targets[possible_ids.index(match)]
-    print("{}Multiple target conversions ({}), picking similar ID:\n  base:   {}\n  target: {}{}"
-                  .format(Fore.YELLOW, len(targets), base_configuration, target, Style.RESET_ALL))
-    return target
+    if len(targets) > 1:
+        logger.error("Even after filtering, multiple conversion candidates for {}".format(base_configuration))
+        for target in targets:
+            logger.error("    target: {}".format(target))
+    
+    assert len(targets)
+    return targets[0]
 
 
 def remove_duplicate_targets(conversions):
-    """If multiple conversions are possible for an intrinsic configuration, choose one, or skip"""
-    conversion_map = {}
-
+    """If multiple conversions are possible for an intrinsic configuration, choose one per target instruction set, or skip"""
+    # Build two level map: base configuration => target instruction_set => list of targets
+    conversion_map = defaultdict(lambda: defaultdict(list))
     for conversion in conversions:
         base, target = conversion
-
-        if base not in conversion_map:
-            conversion_map[base] = [target]
-        else:
-            conversion_map[base].append(target)
-
-    for base, targets in conversion_map.items():
-        target = pick_target(base, targets)
-        yield (base, target)
+        conversion_map[base][target.instruction_set].append(target)
+    
+    for base, targets_by_instruction_set in conversion_map.items():
+        for targets in targets_by_instruction_set.values():
+            # Choose one target out of candidates in the same instruction set
+            target = pick_target(base, targets)
+            yield (base, target)
 
 
 def recommend_conversions(equivalence_lists):
+    """Given lists of equivalent testbeds, generate conversion pairs."""
     pairs = []
 
-    for equivs in equivalence_lists:
-        configurations = set()
+    for equivalence_list in equivalence_lists:
+        equivalent_configurations = set()
 
-        # Parse intrinsic configuration name
-        for config_str in equivs:
+        for config_str in equivalence_list:
+            # Parse intrinsic configuration name
             _, intrin_id, combination, repeat, __ = config_str.split("/")
 
             _, __, combination = combination.partition("_")
@@ -241,11 +250,11 @@ def recommend_conversions(equivalence_lists):
             configuration = Configuration(id=intrin_id,
                                           combination=combination,
                                           repeat=repeat)
-            configurations.add(configuration)
+            equivalent_configurations.add(configuration)
 
-        # Filter out unnecessary pairs
+        # If both vertical and horizontal combinations are possible, specify only an ANY combination 
         deduplicated = set()
-        for config in configurations:
+        for config in equivalent_configurations:
             if config.combination == Combination.HORIZONTAL:
                 alt_config = Configuration(id=config.id,
                                            combination=Combination.VERTICAL,
@@ -255,7 +264,7 @@ def recommend_conversions(equivalence_lists):
                                            combination=Combination.HORIZONTAL,
                                            repeat=config.repeat)
 
-            if alt_config in configurations:
+            if alt_config in equivalent_configurations:
                 config = Configuration(id=config.id,
                                        combination=Combination.ANY,
                                        repeat=config.repeat)
@@ -266,12 +275,21 @@ def recommend_conversions(equivalence_lists):
             combinations = itertools.combinations(deduplicated, 2)
             pairs.extend(combinations)
 
-    # Filter out some semantically different instructions
-    pairs = filter_ucomi(pairs)
-    pairs = order_pairs(pairs)
-    pairs = filter_high_repetitions(pairs)
-    #pairs = filter_differing_arguments(pairs)
-    pairs = remove_duplicate_targets(pairs)
+    # Filter out semantically different instructions with rules
+    filter_steps = [
+        "filter_ucomi",
+        "filter_high_repetitions",
+        "filter_differing_arguments",
+        "order_pairs",
+        "remove_duplicate_targets",
+    ]
+
+    for filter_fn_name in filter_steps:
+        num_pairs = len(pairs)
+        filter_fn = eval(filter_fn_name)
+        pairs = list(filter_fn(pairs))
+        logger.info("FILTER ({}): {} => {} conversion pairs".format(filter_fn_name, num_pairs, len(pairs)))
+
     return pairs
 
 
@@ -294,15 +312,16 @@ if __name__=="__main__":
     equivalences = {}
 
     # DEBUG:
-    args.log = args.log[:25]
+    args.log = args.log[:100]
 
     # Build & refine equivalence set by candidates from test logs
     for log_path in args.log:
         with open(log_path, "r") as log_file:
             common_outputs = find_common_outputs(log_file)
-            total = sum(map(len, equivalences.values()))
-            print(log_path, total)
+            beginning_count = sum(map(len, equivalences.values()))
             refine_equivalences(equivalences, common_outputs.values())
+            final_count = sum(map(len, equivalences.values()))
+            logger.info("REFINED equivalences {:6} => {:6} with {}".format(beginning_count, final_count, log_path))
 
     # Remove duplicate equivalence sets
     equivalences_dedup = set()
@@ -311,7 +330,7 @@ if __name__=="__main__":
         equivalences_dedup.add(equiv_set)
 
     # Convert sets into lists, find missed instructions
-    equivalence_lists = []
+    equivalence_lists = []  # Elements are lists of equivalent testbeds
     missed_list = []
     for equiv_set in equivalences_dedup:
         if len(equiv_set) > 1:
@@ -330,9 +349,14 @@ if __name__=="__main__":
         json.dump(missed_list, missed_f)
 
     # Find pairs of conversions from lists of equivalent intrinsics
-    conversions = list(recommend_conversions(equivalence_lists))
-    print("Found {} conversions".format(len(conversions)))
+    conversions = recommend_conversions(equivalence_lists)
+
+    logger.info("Found {} conversions".format(len(conversions)))
+    for conversion in conversions:
+        VF = conversion[0].repeat / conversion[1].repeat
+        if "psrl_q" in conversion[0].id:
+        # if VF not in (1.0, 2.0, 0.5):
+            logger.info("  VF: {}, {} => {}".format(VF, *conversion))
 
     with open(os.path.join(args.output_folder, "test_conversions.json"), "w") as conversions_f:
         serialize_conversions(conversions, conversions_f)
-
