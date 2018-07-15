@@ -92,12 +92,12 @@ if __name__=="__main__":
         records = dict(records)
         json.dump(records, open("intrinsics_all.json", "w"))
 
-        sse2 = record_utils.filter_sse2(records)
-        json.dump(sse2, open("intrinsics_sse2.json", "w"))
+        #sse2 = record_utils.filter_sse2(records)
+        #json.dump(sse2, open("intrinsics_sse2.json", "w"))
 
-        avx2 = record_utils.filter_avx2(records)
-        json.dump(avx2, open("intrinsics_avx2.json", "w"))
+        #avx2 = record_utils.filter_avx2(records)
+        #json.dump(avx2, open("intrinsics_avx2.json", "w"))
 
-        avx = record_utils.filter_avx(records)
-        json.dump(avx, open("intrinsics_avx.json", "w"))
+        #avx = record_utils.filter_avx(records)
+        #json.dump(avx, open("intrinsics_avx.json", "w"))
 
