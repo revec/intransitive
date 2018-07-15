@@ -1,0 +1,8 @@
+colorama
+coloredlogs
+python-Levenshtein
+
+# Development requirements
+ipython
+pylint
+rope
