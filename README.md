@@ -9,4 +9,5 @@ rm -r tests
 python3 generate_tests.py --seed $ENUM_SEED
 make testbeds
 make run-testbeds > testbeds_seed$ENUM_SEED.log
+python3 generate_intrinsic_map.py
 ```

@@ -4,6 +4,7 @@ import argparse
 import enum
 import itertools
 import json
+import math
 import os
 import random
 import re
@@ -15,14 +16,14 @@ import traceback
 from colorama import Fore, Style
 
 import record_utils
-from utilities import type_to_format, Combination, get_type
+from utilities import Combination, get_type, type_to_format
 
 parser = argparse.ArgumentParser(description="Generate testbeds for intrinsic equality testing")
 parser.add_argument("--seed", type=int, required=False, default=0,
                     help="Seed for the input generator. The default of 0 indicates that edge cases should be generated.")
 parser.add_argument("--test-index", type=int, required=False, default=0,
                     help="Index of generated test (made of specific byte chunks)")
-parser.add_argument("--max-bits", type=int, default=768,
+parser.add_argument("--max-bits", type=int, default=2048,
                     help="Maximum number of bits to generate for inputs")
 #parser.add_argument("--shuffle-input", type=int, default=0x000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F02122232425262728292A2B2C2D2E2F303132333435363738393A3B3C3D3E3F404142434445464748494A4B4C4D4E4F505152535455565758595A5B5C5D5E5F)
 args = parser.parse_args()
@@ -30,12 +31,14 @@ args = parser.parse_args()
 test_byte_chunks = [
     "00" * 8,
     "10" * 8,
+    "01" * 8,
     "ff" * 8,
 ]
 
 def combine_test_input_chunks(num_bytes, test_index):
     """Generate a test"""
-    combinations = itertools.combinations_with_replacement(test_byte_chunks, num_bytes // 8)
+    combinations = list(itertools.combinations_with_replacement(test_byte_chunks, num_bytes // 8))
+    print("Number of test inputs possible: {}".format(len(combinations)))
 
     for i, chunks in enumerate(combinations):
         if i == test_index:
@@ -264,9 +267,11 @@ def generate_store_testbed(intrinsic, properties, n_input_bits, inputs):
         total_param_bits += param_width * param_element_bits
 
     # Find how many times to repeat the operation
-    max_num_repeat = n_input_bits // total_param_bits
+    max_log_repeat = int(math.log2(n_input_bits / total_param_bits))
 
-    for num_repeat in range(1, max_num_repeat + 1):
+    for log_num_repeat in range(0, max_log_repeat + 1):
+        num_repeat = 2 ** log_num_repeat
+
         for combination in (Combination.HORIZONTAL, Combination.VERTICAL):
             try:
                 testbed = make_testbed(
@@ -284,7 +289,6 @@ def generate_store_testbed(intrinsic, properties, n_input_bits, inputs):
                     testbed_file.write(testbed)
             except TypeError as e:
                 print(e)
-                # traceback.print_exc()
 
 if __name__=="__main__":
     intel_vector = {}
@@ -306,4 +310,3 @@ if __name__=="__main__":
                                properties=properties,
                                n_input_bits=args.max_bits,
                                inputs=inputs)
-

@@ -2,7 +2,7 @@
 
 set -ex
 
-for index in $(seq 0 90); do
+for index in $(seq 0 6544); do
     # NOTE: Cannot run these in parallel, as they overwrite the
     # tests directory.
     rm -rf tests
