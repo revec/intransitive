@@ -3,12 +3,15 @@
 Generate peephole rules to collapse intrinsics in LLVM IR, particularly for vector intrinsics.
 
 ## Generation process:
+### Set up a virtual environment
 ```
-# Set up virtual environment
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
+```
 
+### Enumeration process
+```
 # Generate intrinsics_all.json from IntrinsicRecords.td (TableGen file from LLVM source)
 python parse_records.py
 
@@ -22,6 +25,15 @@ python parse_records.py
 # Generate a header file that encodes discovered equivalences
 python generate_intrinsic_map.py
 ```
+
+### Updating IntrinsicRecords.td
+If needed, IntrinsicRecords.td can be regenerated from intrinsic definitions in the LLVM source. From the root of the LLVM source repository (e.g. a clone of https://github.com/llvm-mirror/llvm), execute:
+
+```
+llvm-tblgen include/llvm/IR/Intrinsics.td -Iinclude > /path/to/output/IntrinsicRecords.td
+```
+
+This repository currently contains definitions generated from LLVM's `release_60` branch.
 
 ## Old instructions (for a single seed)
 ```
