@@ -47,24 +47,27 @@ class Configuration(object):
     def to_dict(self):
         return {
             "id": self.id,
-            "combination": self.combination,
+            "combination": self.combination.name,
             "repeat": self.repeat,
         }
 
-    def __str__(self):
-        return "Conf({id}, {combination}, {repeat})".format(
+    def __repr__(self):
+        return "Configuration({id}, {combination}, {repeat})".format(
                 id=self.id,
-                combination=self.combination,
+                combination=self.combination.name,
                 repeat=self.repeat)
 
-    def __repr__(self):
-        return str(self)
-
     def __hash__(self):
-        return hash((self.id, self.combination, self.repeat))
-    
+        # This is a terrible hash, but solves a non-determinacy bug in which
+        # filter_high_repetitions produces variable length outputs
+        return 0
+        #return hash((self.id, self.combination.name, self.repeat))
+
     def __eq__(self, other):
-        return self.id == other.id and self.combination == other.combination and self.repeat == other.repeat
+        return (self.__class__ == other.__class__ and
+              self.id == other.id and
+              self.combination == other.combination and
+              self.repeat == other.repeat)
 
 
 def find_common_outputs(log_path):
@@ -130,9 +133,7 @@ def filter_high_repetitions(conversions):
 
     Example: don't convert 4x sse2 into 2x avx2, if a 2x sse2 to 1x avx2 conversion is available.
     """
-    conversions = set(conversions)
     simple_conversions = set()
-
     for conversion in conversions:
         repeat_0 = conversion[0].repeat
         repeat_1 = conversion[1].repeat
@@ -154,7 +155,7 @@ def filter_high_repetitions(conversions):
             # Simplest conversion available
             simple_conversions.add(conversion)
 
-    return simple_conversions
+    return list(simple_conversions)
 
 
 def order_pairs(conversions):
@@ -178,7 +179,8 @@ def order_pairs(conversions):
             elif power < 0:
                 yield conversion
             else:
-                logger.warn("Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}".format(a, b))
+                #logger.warn("Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}".format(a, b))
+                pass
 
 
 def filter_differing_arguments(conversions):
@@ -210,10 +212,10 @@ def pick_target(base_configuration, targets):
     min_distance = min(distances.values())
     targets = [conf for conf, distance in distances.items() if distance == min_distance]
 
-    if len(targets) > 1:
-        logger.error("Even after filtering, multiple conversion candidates for {}".format(base_configuration))
-        for target in targets:
-            logger.error("    target: {}".format(target))
+    #if len(targets) > 1:
+        #logger.error("Even after filtering, multiple conversion candidates for {}. Picking first.".format(base_configuration))
+        #for target in targets:
+            #logger.error("    target: {}".format(target))
 
     assert len(targets)
     return targets[0]
@@ -302,22 +304,24 @@ def serialize_conversions(conversions, fp):
     for conversion in conversions:
         conversion_dicts = []
         for config in conversion:
-            config_dict = dict(config.to_dict())
-            config_dict["combination"] = config_dict["combination"].name
+            config_dict = config.to_dict()
             conversion_dicts.append(config_dict)
         conversions_serializable.append(conversion_dicts)
 
     json.dump(conversions_serializable, fp)
 
 if __name__=="__main__":
-    # Generate equality candidates from input test log files
-    equivalences = {}
+    args.log.sort()
+    import random
+    random.seed(123)
 
     # Build & refine equivalence set by candidates from test logs
     logger.info("Parsing test log files to extract equivalence lists")
     executor = ProcessPoolExecutor()
     all_log_equivalences = tqdm_parallel_map(executor, find_common_outputs, args.log)
-    
+
+    # Given these equivalence lists, build and refine equivalence sets
+    equivalences = {}
     for log_equivalences in all_log_equivalences:
         refine_equivalences(equivalences, log_equivalences)
 
