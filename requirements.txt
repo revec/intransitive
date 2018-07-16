@@ -1,6 +1,7 @@
 colorama
 coloredlogs
 python-Levenshtein
+tqdm
 
 # Development requirements
 ipython

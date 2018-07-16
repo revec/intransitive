@@ -2,6 +2,7 @@
 
 import argparse
 from collections import defaultdict, namedtuple
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import difflib
 import itertools
 import json
@@ -18,7 +19,7 @@ import Levenshtein
 from IPython import embed
 import pdb
 
-from utilities import Combination, get_type
+from utilities import Combination, get_type, tqdm_parallel_map
 
 coloredlogs.install()
 logger = logging.getLogger(__name__)
@@ -66,26 +67,28 @@ class Configuration(object):
         return self.id == other.id and self.combination == other.combination and self.repeat == other.repeat
 
 
-def find_common_outputs(log_file):
+def find_common_outputs(log_path):
+    """Create a map from test output to a list of intrinsics that produced that output"""
     test_outputs = []
     testbed_path = None
 
     output_to_intrinsics = defaultdict(list)
 
-    for line in log_file:
-        m = re.match("TEST START (.+/testbed)", line)
-        if m:
-            testbed_path = m.group(1)
-        elif re.match("TEST STOP", line):
-            # TODO: Add other possible byte shuffles
-            output = "".join(test_outputs)
-            test_outputs.clear()
+    with open(log_path, "r") as log_file:
+        for line in log_file:
+            m = re.match("TEST START (.+/testbed)", line)
+            if m:
+                testbed_path = m.group(1)
+            elif re.match("TEST STOP", line):
+                # TODO: Add other possible byte shuffles
+                output = "".join(test_outputs)
+                test_outputs.clear()
 
-            output_to_intrinsics[output].append(testbed_path)
-        else:
-            test_outputs.append(line.strip())
+                output_to_intrinsics[output].append(testbed_path)
+            else:
+                test_outputs.append(line.strip())
 
-    return output_to_intrinsics
+    return list(output_to_intrinsics.values())
 
 
 def refine_equivalences(equivalences, candidate_equivalences):
@@ -311,13 +314,15 @@ if __name__=="__main__":
     equivalences = {}
 
     # Build & refine equivalence set by candidates from test logs
-    for log_path in args.log:
-        with open(log_path, "r") as log_file:
-            common_outputs = find_common_outputs(log_file)
-            beginning_count = sum(map(len, equivalences.values()))
-            refine_equivalences(equivalences, common_outputs.values())
-            final_count = sum(map(len, equivalences.values()))
-            logger.info("REFINED equivalences {:6} => {:6} with {}".format(beginning_count, final_count, log_path))
+    logger.info("Parsing test log files to extract equivalence lists")
+    executor = ProcessPoolExecutor()
+    all_log_equivalences = tqdm_parallel_map(executor, find_common_outputs, args.log)
+    
+    for log_equivalences in all_log_equivalences:
+        refine_equivalences(equivalences, log_equivalences)
+
+    final_count = sum(map(len, equivalences.values()))
+    logger.info("REFINED equivalences {:6}".format(final_count))
 
     # Remove duplicate equivalence sets
     equivalences_dedup = set()

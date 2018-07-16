@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
+import concurrent.futures
 import enum
 import re
 
 from colorama import Fore, Style
+from tqdm import tqdm
+
 
 type_to_format = {
     "i8": "b", # signed char
@@ -12,10 +15,12 @@ type_to_format = {
     "i64": "q",
 }
 
+
 class Combination(enum.Enum):
     HORIZONTAL = 1
     VERTICAL = 2
     ANY = 3
+
 
 def get_type(identifier):
     m = re.match(r"llvm_v([0-9]+)([if])([0-9]+)_ty", identifier)
@@ -46,3 +51,16 @@ def get_type(identifier):
     raise TypeError(Fore.RED + "Bad type: {}".format(identifier) + Style.RESET_ALL)
 
 
+# https://techoverflow.net/2017/05/18/how-to-use-concurrent-futures-map-with-a-tqdm-progress-bar/
+def tqdm_parallel_map(executor, fn, iterable, **kwargs):
+    """
+    Equivalent to executor.map(fn, iterable),
+    but displays a tqdm-based progress bar.
+    
+    Does not support timeout or chunksize as executor.submit is used internally
+    
+    **kwargs is passed to tqdm.
+    """
+    futures_list = [executor.submit(fn, i) for i in iterable]
+    for f in tqdm(concurrent.futures.as_completed(futures_list), total=len(futures_list), **kwargs):
+        yield f.result()

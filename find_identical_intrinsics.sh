@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -ex
-
 ./find_identical_intrinsics.py --log logs/testbeds_*.log --output-folder logs/
 
 # Format output JSON
