@@ -64,10 +64,9 @@ class Configuration(object):
         #return hash((self.id, self.combination.name, self.repeat))
 
     def __eq__(self, other):
-        return (self.__class__ == other.__class__ and
-              self.id == other.id and
-              self.combination == other.combination and
-              self.repeat == other.repeat)
+        return (self.id == other.id and
+                self.combination.name == other.combination.name and
+                self.repeat == other.repeat)
 
 
 def find_common_outputs(log_path):
@@ -179,8 +178,7 @@ def order_pairs(conversions):
             elif power < 0:
                 yield conversion
             else:
-                #logger.warn("Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}".format(a, b))
-                pass
+                logger.warn("Unclear conversion direction for intrinsics:\n  base:   {}\n  target: {}".format(a, b))
 
 
 def filter_differing_arguments(conversions):
@@ -212,10 +210,19 @@ def pick_target(base_configuration, targets):
     min_distance = min(distances.values())
     targets = [conf for conf, distance in distances.items() if distance == min_distance]
 
-    #if len(targets) > 1:
-        #logger.error("Even after filtering, multiple conversion candidates for {}. Picking first.".format(base_configuration))
-        #for target in targets:
-            #logger.error("    target: {}".format(target))
+    # Remove an unnecessary VERTICAL configuration if the ANY configuration is present
+    # FIXME: recommend_conversions should make this unnecessary
+    filtered = []
+    for target in targets:
+        if (target.combination == Combination.ANY or
+            Configuration(id=target.id, combination=Combination.ANY, repeat=target.repeat) not in targets):
+            filtered.append(target)
+    targets = filtered
+
+    if len(targets) > 1:
+        logger.error("Even after filtering, multiple conversion candidates for {}. Picking first.".format(base_configuration))
+        for target in targets:
+            logger.error("    target: {}".format(target))
 
     assert len(targets)
     return targets[0]
@@ -257,24 +264,17 @@ def recommend_conversions(equivalence_lists):
                                           repeat=repeat)
             equivalent_configurations.add(configuration)
 
-        # If both vertical and horizontal combinations are possible, specify only an ANY combination 
+        # If both vertical and horizontal combinations are possible, specify only an ANY combination
         deduplicated = set()
         for config in equivalent_configurations:
-            if config.combination == Combination.HORIZONTAL:
-                alt_config = Configuration(id=config.id,
-                                           combination=Combination.VERTICAL,
-                                           repeat=config.repeat)
-            elif config.combination == Combination.VERTICAL:
-                alt_config = Configuration(id=config.id,
-                                           combination=Combination.HORIZONTAL,
-                                           repeat=config.repeat)
-
-            if alt_config in equivalent_configurations:
-                config = Configuration(id=config.id,
-                                       combination=Combination.ANY,
+            alt_config = Configuration(id=config.id,
+                                       combination=Combination.VERTICAL if config.combination == Combination.HORIZONTAL else Combination.HORIZONTAL,
                                        repeat=config.repeat)
 
-            deduplicated.add(config)
+            if alt_config in equivalent_configurations:
+                deduplicated.add(Configuration(config.id, Combination.ANY, config.repeat))
+            else:
+                deduplicated.add(config)
 
         if len(deduplicated) > 1:
             combinations = itertools.combinations(deduplicated, 2)
@@ -311,10 +311,6 @@ def serialize_conversions(conversions, fp):
     json.dump(conversions_serializable, fp)
 
 if __name__=="__main__":
-    args.log.sort()
-    import random
-    random.seed(123)
-
     # Build & refine equivalence set by candidates from test logs
     logger.info("Parsing test log files to extract equivalence lists")
     executor = ProcessPoolExecutor()
