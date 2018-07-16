@@ -211,7 +211,7 @@ def pick_target(base_configuration, targets):
         logger.error("Even after filtering, multiple conversion candidates for {}".format(base_configuration))
         for target in targets:
             logger.error("    target: {}".format(target))
-    
+
     assert len(targets)
     return targets[0]
 
@@ -223,7 +223,7 @@ def remove_duplicate_targets(conversions):
     for conversion in conversions:
         base, target = conversion
         conversion_map[base][target.instruction_set].append(target)
-    
+
     for base, targets_by_instruction_set in conversion_map.items():
         for targets in targets_by_instruction_set.values():
             # Choose one target out of candidates in the same instruction set
@@ -308,11 +308,7 @@ def serialize_conversions(conversions, fp):
 
 if __name__=="__main__":
     # Generate equality candidates from input test log files
-
     equivalences = {}
-
-    # DEBUG:
-    args.log = args.log[:100]
 
     # Build & refine equivalence set by candidates from test logs
     for log_path in args.log:
@@ -355,8 +351,8 @@ if __name__=="__main__":
     for conversion in conversions:
         VF = conversion[0].repeat / conversion[1].repeat
         if "psrl_q" in conversion[0].id:
-        # if VF not in (1.0, 2.0, 0.5):
             logger.info("  VF: {}, {} => {}".format(VF, *conversion))
 
     with open(os.path.join(args.output_folder, "test_conversions.json"), "w") as conversions_f:
         serialize_conversions(conversions, conversions_f)
+
