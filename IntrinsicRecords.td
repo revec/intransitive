@@ -28,8 +28,8 @@ class AMDGPUAtomicIncIntrin {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, anonymous_414, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_415];
+  list<LLVMType> ParamTypes = [llvm_anyptr_ty, anonymous_413, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_414];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -103,19 +103,6 @@ class AMDGPUImageStore {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-class AMDGPULDSF32Intrin<string AMDGPULDSF32Intrin:clang_builtin = ?> {	// GCCBuiltin SDPatternOperator Intrinsic
-  string GCCBuiltinName = AMDGPULDSF32Intrin:clang_builtin;
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = Intrinsic:sd_properties;
-  string LLVMName = Intrinsic:name;
-  string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [llvm_float_ty];
-  list<LLVMType> ParamTypes = [anonymous_416, llvm_float_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_417];
-  bit isTarget = 0;
-  string NAME = ?;
-}
 class AMDGPUReadPreloadRegisterIntrinsic {	// SDPatternOperator Intrinsic
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
@@ -139,18 +126,6 @@ class AMDGPUReadPreloadRegisterIntrinsicNamed<string AMDGPUReadPreloadRegisterIn
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string GCCBuiltinName = AMDGPUReadPreloadRegisterIntrinsicNamed:name;
-  string NAME = ?;
-}
-class AdvSIMD_1Arg_Intrinsic {	// SDPatternOperator Intrinsic
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = Intrinsic:sd_properties;
-  string LLVMName = Intrinsic:name;
-  string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_any_ty];
-  list<LLVMType> ParamTypes = [anonymous_234];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
-  bit isTarget = 0;
   string NAME = ?;
 }
 class AdvSIMD_1FloatArg_Intrinsic {	// SDPatternOperator Intrinsic
@@ -196,7 +171,7 @@ class AdvSIMD_1Vec_Load_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_237];
+  list<LLVMType> ParamTypes = [anonymous_236];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -209,7 +184,7 @@ class AdvSIMD_1Vec_Store_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyvector_ty, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_238];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_237];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -351,8 +326,8 @@ class AdvSIMD_2Vec_Load_Intrinsic {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_239];
-  list<LLVMType> ParamTypes = [anonymous_241];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_238];
+  list<LLVMType> ParamTypes = [anonymous_240];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -363,8 +338,8 @@ class AdvSIMD_2Vec_Load_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_242];
-  list<LLVMType> ParamTypes = [anonymous_243, anonymous_244, llvm_i64_ty, llvm_anyptr_ty];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_241];
+  list<LLVMType> ParamTypes = [anonymous_242, anonymous_243, llvm_i64_ty, llvm_anyptr_ty];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -376,8 +351,8 @@ class AdvSIMD_2Vec_Store_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_245, anonymous_247];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_248];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_244, anonymous_246];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_247];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -388,8 +363,8 @@ class AdvSIMD_2Vec_Store_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_249, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_250];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_248, llvm_i64_ty, llvm_anyptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_249];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -400,7 +375,7 @@ class AdvSIMD_2Vector2Index_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, llvm_i64_ty, anonymous_235, llvm_i64_ty];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, llvm_i64_ty, anonymous_234, llvm_i64_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -519,8 +494,8 @@ class AdvSIMD_3Vec_Load_Intrinsic {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_251, anonymous_252];
-  list<LLVMType> ParamTypes = [anonymous_254];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_250, anonymous_251];
+  list<LLVMType> ParamTypes = [anonymous_253];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -531,8 +506,8 @@ class AdvSIMD_3Vec_Load_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_255, anonymous_256];
-  list<LLVMType> ParamTypes = [anonymous_257, anonymous_258, anonymous_259, llvm_i64_ty, llvm_anyptr_ty];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_254, anonymous_255];
+  list<LLVMType> ParamTypes = [anonymous_256, anonymous_257, anonymous_258, llvm_i64_ty, llvm_anyptr_ty];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -544,8 +519,8 @@ class AdvSIMD_3Vec_Store_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_260, anonymous_261, anonymous_263];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_264];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_259, anonymous_260, anonymous_262];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_263];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -556,8 +531,8 @@ class AdvSIMD_3Vec_Store_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_265, anonymous_266, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_267];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_264, anonymous_265, llvm_i64_ty, llvm_anyptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_266];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -615,8 +590,8 @@ class AdvSIMD_4Vec_Load_Intrinsic {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_268, anonymous_269, anonymous_270];
-  list<LLVMType> ParamTypes = [anonymous_272];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_267, anonymous_268, anonymous_269];
+  list<LLVMType> ParamTypes = [anonymous_271];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -627,8 +602,8 @@ class AdvSIMD_4Vec_Load_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_273, anonymous_274, anonymous_275];
-  list<LLVMType> ParamTypes = [anonymous_276, anonymous_277, anonymous_278, anonymous_279, llvm_i64_ty, llvm_anyptr_ty];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_272, anonymous_273, anonymous_274];
+  list<LLVMType> ParamTypes = [anonymous_275, anonymous_276, anonymous_277, anonymous_278, llvm_i64_ty, llvm_anyptr_ty];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -640,8 +615,8 @@ class AdvSIMD_4Vec_Store_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_280, anonymous_281, anonymous_282, anonymous_284];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_285];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_279, anonymous_280, anonymous_281, anonymous_283];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_284];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -652,8 +627,8 @@ class AdvSIMD_4Vec_Store_Lane_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_286, anonymous_287, anonymous_288, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_289];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_285, anonymous_286, anonymous_287, llvm_i64_ty, llvm_anyptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_288];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -700,7 +675,7 @@ class AdvSIMD_Tbl1_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, anonymous_290];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, anonymous_289];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -712,7 +687,7 @@ class AdvSIMD_Tbl2_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, anonymous_291];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, anonymous_290];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -724,7 +699,7 @@ class AdvSIMD_Tbl3_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_292];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_291];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -736,7 +711,7 @@ class AdvSIMD_Tbl4_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_293];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_292];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -748,7 +723,7 @@ class AdvSIMD_Tbx1_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_294, llvm_v16i8_ty, anonymous_295];
+  list<LLVMType> ParamTypes = [anonymous_293, llvm_v16i8_ty, anonymous_294];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -760,7 +735,7 @@ class AdvSIMD_Tbx2_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_296, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_297];
+  list<LLVMType> ParamTypes = [anonymous_295, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_296];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -772,7 +747,7 @@ class AdvSIMD_Tbx3_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_298, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_299];
+  list<LLVMType> ParamTypes = [anonymous_297, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_298];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -784,7 +759,7 @@ class AdvSIMD_Tbx4_Intrinsic {	// SDPatternOperator Intrinsic
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_300, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_301];
+  list<LLVMType> ParamTypes = [anonymous_299, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_300];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -3933,36 +3908,36 @@ class MSBuiltin<string MSBuiltin:name = ?> {
   string MSBuiltinName = MSBuiltin:name;
   string NAME = ?;
 }
-class NVVM_WMMA_LD_GALSTS<string NVVM_WMMA_LD_GALSTS:Geometry = ?, string NVVM_WMMA_LD_GALSTS:Abc = ?, string NVVM_WMMA_LD_GALSTS:Layout = ?, string NVVM_WMMA_LD_GALSTS:Type = ?, LLVMType NVVM_WMMA_LD_GALSTS:regty = ?, int NVVM_WMMA_LD_GALSTS:WithStride = ?> {	// SDPatternOperator Intrinsic
+class NVVM_WMMA_LD_ALSTS<string NVVM_WMMA_LD_ALSTS:Abc = ?, string NVVM_WMMA_LD_ALSTS:Layout = ?, string NVVM_WMMA_LD_ALSTS:Space = ?, string NVVM_WMMA_LD_ALSTS:Type = ?, LLVMType NVVM_WMMA_LD_ALSTS:regty = ?, int NVVM_WMMA_LD_ALSTS:WithStride = ?> {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
-  string LLVMName = !strconcat("llvm.nvvm.wmma.", !strconcat(NVVM_WMMA_LD_GALSTS:Geometry, !strconcat(".load", !strconcat(".", !strconcat(NVVM_WMMA_LD_GALSTS:Abc, !strconcat(".", !strconcat(NVVM_WMMA_LD_GALSTS:Layout, !strconcat(!if(NVVM_WMMA_LD_GALSTS:WithStride, ".stride", ""), !strconcat(".", NVVM_WMMA_LD_GALSTS:Type)))))))));
+  string LLVMName = !strconcat("llvm.nvvm.wmma.load.", !strconcat(NVVM_WMMA_LD_ALSTS:Abc, !strconcat(".sync.", !strconcat(NVVM_WMMA_LD_ALSTS:Layout, !strconcat(".m16n16k16", !strconcat(NVVM_WMMA_LD_ALSTS:Space, !strconcat(!if(NVVM_WMMA_LD_ALSTS:WithStride, ".stride", ""), !strconcat(".", NVVM_WMMA_LD_ALSTS:Type))))))));
   string TargetPrefix = "nvvm";
-  list<LLVMType> RetTypes = !if(!eq(!strconcat(NVVM_WMMA_LD_GALSTS:Abc, NVVM_WMMA_LD_GALSTS:Type), "cf16"), [NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty], [NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty, NVVM_WMMA_LD_GALSTS:regty]);
-  list<LLVMType> ParamTypes = !if(NVVM_WMMA_LD_GALSTS:WithStride, [llvm_anyptr_ty, llvm_i32_ty], [llvm_anyptr_ty]);
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> RetTypes = !if(!eq(!strconcat(NVVM_WMMA_LD_ALSTS:Abc, NVVM_WMMA_LD_ALSTS:Type), "cf16"), [NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty], [NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty, NVVM_WMMA_LD_ALSTS:regty]);
+  list<LLVMType> ParamTypes = !if(NVVM_WMMA_LD_ALSTS:WithStride, [llvm_ptr_ty, llvm_i32_ty], [llvm_ptr_ty]);
+  list<IntrinsicProperty> IntrProperties = [];
   bit isTarget = 0;
   string NAME = ?;
 }
-class NVVM_WMMA_MMA_GABDCS<string NVVM_WMMA_MMA_GABDCS:Geometry = ?, string NVVM_WMMA_MMA_GABDCS:ALayout = ?, string NVVM_WMMA_MMA_GABDCS:BLayout = ?, string NVVM_WMMA_MMA_GABDCS:DType = ?, LLVMType NVVM_WMMA_MMA_GABDCS:d_regty = ?, string NVVM_WMMA_MMA_GABDCS:CType = ?, LLVMType NVVM_WMMA_MMA_GABDCS:c_regty = ?, string NVVM_WMMA_MMA_GABDCS:Satfinite = ""> {	// SDPatternOperator Intrinsic
+class NVVM_WMMA_MMA_ABDCS<string NVVM_WMMA_MMA_ABDCS:ALayout = ?, string NVVM_WMMA_MMA_ABDCS:BLayout = ?, string NVVM_WMMA_MMA_ABDCS:DType = ?, LLVMType NVVM_WMMA_MMA_ABDCS:d_regty = ?, string NVVM_WMMA_MMA_ABDCS:CType = ?, LLVMType NVVM_WMMA_MMA_ABDCS:c_regty = ?, string NVVM_WMMA_MMA_ABDCS:Satfinite = ""> {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
-  string LLVMName = !strconcat("llvm.nvvm.wmma.", !strconcat(NVVM_WMMA_MMA_GABDCS:Geometry, !strconcat(".mma", !strconcat(".", !strconcat(NVVM_WMMA_MMA_GABDCS:ALayout, !strconcat(".", !strconcat(NVVM_WMMA_MMA_GABDCS:BLayout, !strconcat(".", !strconcat(NVVM_WMMA_MMA_GABDCS:DType, !strconcat(".", !strconcat(NVVM_WMMA_MMA_GABDCS:CType, NVVM_WMMA_MMA_GABDCS:Satfinite)))))))))));
+  string LLVMName = !strconcat("llvm.nvvm.wmma.mma.sync.", !strconcat(NVVM_WMMA_MMA_ABDCS:ALayout, !strconcat(".", !strconcat(NVVM_WMMA_MMA_ABDCS:BLayout, !strconcat(".m16n16k16.", !strconcat(NVVM_WMMA_MMA_ABDCS:DType, !strconcat(".", !strconcat(NVVM_WMMA_MMA_ABDCS:CType, NVVM_WMMA_MMA_ABDCS:Satfinite))))))));
   string TargetPrefix = "nvvm";
-  list<LLVMType> RetTypes = !if(!eq(NVVM_WMMA_MMA_GABDCS:DType, "f16"), [NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty], [NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty, NVVM_WMMA_MMA_GABDCS:d_regty]);
-  list<LLVMType> ParamTypes = !listconcat([llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty], !if(!eq(NVVM_WMMA_MMA_GABDCS:CType, "f16"), [NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty], [NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty, NVVM_WMMA_MMA_GABDCS:c_regty]));
+  list<LLVMType> RetTypes = !if(!eq(NVVM_WMMA_MMA_ABDCS:DType, "f16"), [NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty], [NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty, NVVM_WMMA_MMA_ABDCS:d_regty]);
+  list<LLVMType> ParamTypes = !listconcat([llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty], !if(!eq(NVVM_WMMA_MMA_ABDCS:CType, "f16"), [NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty], [NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty, NVVM_WMMA_MMA_ABDCS:c_regty]));
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
-class NVVM_WMMA_STD_GLSTS<string NVVM_WMMA_STD_GLSTS:Geometry = ?, string NVVM_WMMA_STD_GLSTS:Layout = ?, string NVVM_WMMA_STD_GLSTS:Type = ?, LLVMType NVVM_WMMA_STD_GLSTS:regty = ?, int NVVM_WMMA_STD_GLSTS:WithStride = ?, list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = []> {	// SDPatternOperator Intrinsic
+class NVVM_WMMA_STD_LSTS<string NVVM_WMMA_STD_LSTS:Layout = ?, string NVVM_WMMA_STD_LSTS:Space = ?, string NVVM_WMMA_STD_LSTS:Type = ?, LLVMType NVVM_WMMA_STD_LSTS:regty = ?, int NVVM_WMMA_STD_LSTS:WithStride = ?, list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = []> {	// SDPatternOperator Intrinsic
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = Intrinsic:sd_properties;
-  string LLVMName = !strconcat("llvm.nvvm.wmma.", !strconcat(NVVM_WMMA_STD_GLSTS:Geometry, !strconcat(".store.d", !strconcat(".", !strconcat(NVVM_WMMA_STD_GLSTS:Layout, !strconcat(!if(NVVM_WMMA_STD_GLSTS:WithStride, ".stride", ""), !strconcat(".", NVVM_WMMA_STD_GLSTS:Type)))))));
+  string LLVMName = !strconcat("llvm.nvvm.wmma.store.d.sync.", !strconcat(NVVM_WMMA_STD_LSTS:Layout, !strconcat(".m16n16k16", !strconcat(NVVM_WMMA_STD_LSTS:Space, !strconcat(!if(NVVM_WMMA_STD_LSTS:WithStride, ".stride", ""), !strconcat(".", NVVM_WMMA_STD_LSTS:Type))))));
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = !listconcat([llvm_anyptr_ty], !listconcat(!if(!eq(NVVM_WMMA_STD_GLSTS:Type, "f16"), [NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty], [NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty, NVVM_WMMA_STD_GLSTS:regty]), !if(NVVM_WMMA_STD_GLSTS:WithStride, [llvm_i32_ty], NVVM_WMMA_STD_GLSTS:Empty)));
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = !listconcat([llvm_ptr_ty], !listconcat(!if(!eq(NVVM_WMMA_STD_LSTS:Type, "f16"), [NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty], [NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty, NVVM_WMMA_STD_LSTS:regty]), !if(NVVM_WMMA_STD_LSTS:WithStride, [llvm_i32_ty], NVVM_WMMA_STD_LSTS:Empty)));
+  list<IntrinsicProperty> IntrProperties = [];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -4454,8 +4429,8 @@ class SCOPED_ATOMIC2_impl<LLVMType SCOPED_ATOMIC2_impl:elty = ?> {	// SDPatternO
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [SCOPED_ATOMIC2_impl:elty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -4466,8 +4441,8 @@ class SCOPED_ATOMIC3_impl<LLVMType SCOPED_ATOMIC3_impl:elty = ?> {	// SDPatternO
   string LLVMName = Intrinsic:name;
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [SCOPED_ATOMIC3_impl:elty];
-  list<LLVMType> ParamTypes = [anonymous_357, anonymous_358, anonymous_359];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_360];
+  list<LLVMType> ParamTypes = [anonymous_356, anonymous_357, anonymous_358];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_359];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -4745,12 +4720,6 @@ def Any {	// ValueType
   string NAME = ?;
 }
 def Commutative {	// IntrinsicProperty
-  string NAME = ?;
-}
-def ExceptRef {	// ValueType
-  string Namespace = "MVT";
-  int Size = 0;
-  int Value = 113;
   string NAME = ?;
 }
 def FlagVT {	// ValueType
@@ -5585,18 +5554,18 @@ def anonymous_235 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_236 {	// LLVMType LLVMMatchType
+def anonymous_236 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = anonymous_235;
+  string NAME = ?;
+}
+def anonymous_237 {	// IntrinsicProperty NoCapture
+  int ArgNo = 2;
+  string NAME = ?;
+}
+def anonymous_238 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
-  string NAME = ?;
-}
-def anonymous_237 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_236;
-  string NAME = ?;
-}
-def anonymous_238 {	// IntrinsicProperty NoCapture
-  int ArgNo = 2;
   string NAME = ?;
 }
 def anonymous_239 {	// LLVMType LLVMMatchType
@@ -5609,14 +5578,14 @@ def anonymous_24 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_240 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_240 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = anonymous_239;
   string NAME = ?;
 }
-def anonymous_241 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_240;
+def anonymous_241 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_242 {	// LLVMType LLVMMatchType
@@ -5639,23 +5608,22 @@ def anonymous_245 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_246 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
-  string NAME = ?;
-}
-def anonymous_247 {	// LLVMType LLVMAnyPointerType
+def anonymous_246 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_246;
+  LLVMType ElTy = anonymous_245;
   string NAME = ?;
 }
-def anonymous_248 {	// IntrinsicProperty NoCapture
+def anonymous_247 {	// IntrinsicProperty NoCapture
   int ArgNo = 2;
   string NAME = ?;
 }
-def anonymous_249 {	// LLVMType LLVMMatchType
+def anonymous_248 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
+  string NAME = ?;
+}
+def anonymous_249 {	// IntrinsicProperty NoCapture
+  int ArgNo = 3;
   string NAME = ?;
 }
 def anonymous_25 {	// LLVMType LLVMMatchType
@@ -5663,8 +5631,9 @@ def anonymous_25 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_250 {	// IntrinsicProperty NoCapture
-  int ArgNo = 3;
+def anonymous_250 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_251 {	// LLVMType LLVMMatchType
@@ -5677,14 +5646,14 @@ def anonymous_252 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_253 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_253 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = anonymous_252;
   string NAME = ?;
 }
-def anonymous_254 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_253;
+def anonymous_254 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_255 {	// LLVMType LLVMMatchType
@@ -5727,18 +5696,18 @@ def anonymous_261 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_262 {	// LLVMType LLVMMatchType
+def anonymous_262 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = anonymous_261;
+  string NAME = ?;
+}
+def anonymous_263 {	// IntrinsicProperty NoCapture
+  int ArgNo = 3;
+  string NAME = ?;
+}
+def anonymous_264 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
-  string NAME = ?;
-}
-def anonymous_263 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_262;
-  string NAME = ?;
-}
-def anonymous_264 {	// IntrinsicProperty NoCapture
-  int ArgNo = 3;
   string NAME = ?;
 }
 def anonymous_265 {	// LLVMType LLVMMatchType
@@ -5746,13 +5715,13 @@ def anonymous_265 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_266 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_266 {	// IntrinsicProperty NoCapture
+  int ArgNo = 4;
   string NAME = ?;
 }
-def anonymous_267 {	// IntrinsicProperty NoCapture
-  int ArgNo = 4;
+def anonymous_267 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_268 {	// LLVMType LLVMMatchType
@@ -5775,14 +5744,14 @@ def anonymous_270 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_271 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_271 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = anonymous_270;
   string NAME = ?;
 }
-def anonymous_272 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_271;
+def anonymous_272 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_273 {	// LLVMType LLVMMatchType
@@ -5840,18 +5809,18 @@ def anonymous_282 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_283 {	// LLVMType LLVMMatchType
+def anonymous_283 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = anonymous_282;
+  string NAME = ?;
+}
+def anonymous_284 {	// IntrinsicProperty NoCapture
+  int ArgNo = 4;
+  string NAME = ?;
+}
+def anonymous_285 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
-  string NAME = ?;
-}
-def anonymous_284 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_283;
-  string NAME = ?;
-}
-def anonymous_285 {	// IntrinsicProperty NoCapture
-  int ArgNo = 4;
   string NAME = ?;
 }
 def anonymous_286 {	// LLVMType LLVMMatchType
@@ -5864,13 +5833,13 @@ def anonymous_287 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_288 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_288 {	// IntrinsicProperty NoCapture
+  int ArgNo = 5;
   string NAME = ?;
 }
-def anonymous_289 {	// IntrinsicProperty NoCapture
-  int ArgNo = 5;
+def anonymous_289 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_29 {	// LLVMType LLVMMatchType
@@ -5942,9 +5911,8 @@ def anonymous_300 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_301 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_301 {	// IntrinsicProperty NoCapture
+  int ArgNo = 0;
   string NAME = ?;
 }
 def anonymous_302 {	// IntrinsicProperty NoCapture
@@ -6050,19 +6018,19 @@ def anonymous_324 {	// IntrinsicProperty NoCapture
   string NAME = ?;
 }
 def anonymous_325 {	// IntrinsicProperty NoCapture
-  int ArgNo = 0;
+  int ArgNo = 1;
   string NAME = ?;
 }
 def anonymous_326 {	// IntrinsicProperty NoCapture
-  int ArgNo = 1;
-  string NAME = ?;
-}
-def anonymous_327 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_328 {	// IntrinsicProperty NoCapture
+def anonymous_327 {	// IntrinsicProperty NoCapture
   int ArgNo = 1;
+  string NAME = ?;
+}
+def anonymous_328 {	// IntrinsicProperty NoCapture
+  int ArgNo = 0;
   string NAME = ?;
 }
 def anonymous_329 {	// IntrinsicProperty NoCapture
@@ -6131,35 +6099,36 @@ def anonymous_342 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_343 {	// IntrinsicProperty NoCapture
-  int ArgNo = 0;
-  string NAME = ?;
-}
-def anonymous_344 {	// LLVMType LLVMAnyPointerType
+def anonymous_343 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
   LLVMType ElTy = llvm_float_ty;
   string NAME = ?;
 }
-def anonymous_345 {	// IntrinsicProperty NoCapture
+def anonymous_344 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_346 {	// LLVMType LLVMAnyPointerType
+def anonymous_345 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
   LLVMType ElTy = llvm_double_ty;
   string NAME = ?;
 }
-def anonymous_347 {	// IntrinsicProperty NoCapture
+def anonymous_346 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_348 {	// LLVMType LLVMAnyPointerType
+def anonymous_347 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
   LLVMType ElTy = llvm_i32_ty;
   string NAME = ?;
 }
-def anonymous_349 {	// IntrinsicProperty NoCapture
+def anonymous_348 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
+  string NAME = ?;
+}
+def anonymous_349 {	// LLVMType LLVMAnyPointerType
+  ValueType VT = iPTRAny;
+  LLVMType ElTy = llvm_i32_ty;
   string NAME = ?;
 }
 def anonymous_35 {	// LLVMType LLVMMatchType
@@ -6167,42 +6136,42 @@ def anonymous_35 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_350 {	// LLVMType LLVMAnyPointerType
-  ValueType VT = iPTRAny;
-  LLVMType ElTy = llvm_i32_ty;
-  string NAME = ?;
-}
-def anonymous_351 {	// IntrinsicProperty NoCapture
+def anonymous_350 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_352 {	// LLVMType LLVMMatchType
+def anonymous_351 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_353 {	// LLVMType LLVMAnyPointerType
+def anonymous_352 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_352;
+  LLVMType ElTy = anonymous_351;
   string NAME = ?;
 }
-def anonymous_354 {	// LLVMType LLVMMatchType
+def anonymous_353 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_355 {	// IntrinsicProperty NoCapture
+def anonymous_354 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_356 {	// LLVMType LLVMMatchType
+def anonymous_355 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_357 {	// LLVMType LLVMAnyPointerType
+def anonymous_356 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_356;
+  LLVMType ElTy = anonymous_355;
+  string NAME = ?;
+}
+def anonymous_357 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_358 {	// LLVMType LLVMMatchType
@@ -6210,9 +6179,8 @@ def anonymous_358 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_359 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_359 {	// IntrinsicProperty NoCapture
+  int ArgNo = 0;
   string NAME = ?;
 }
 def anonymous_36 {	// LLVMType LLVMMatchType
@@ -6220,50 +6188,51 @@ def anonymous_36 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_360 {	// IntrinsicProperty NoCapture
-  int ArgNo = 0;
-  string NAME = ?;
-}
-def anonymous_361 {	// LLVMType LLVMMatchType
+def anonymous_360 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_362 {	// LLVMType LLVMAnyPointerType
+def anonymous_361 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_361;
+  LLVMType ElTy = anonymous_360;
   string NAME = ?;
 }
-def anonymous_363 {	// IntrinsicProperty NoCapture
+def anonymous_362 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_364 {	// LLVMType LLVMMatchType
+def anonymous_363 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_365 {	// LLVMType LLVMAnyPointerType
+def anonymous_364 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_364;
+  LLVMType ElTy = anonymous_363;
   string NAME = ?;
 }
-def anonymous_366 {	// IntrinsicProperty NoCapture
+def anonymous_365 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_367 {	// LLVMType LLVMMatchType
+def anonymous_366 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_368 {	// LLVMType LLVMAnyPointerType
+def anonymous_367 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_367;
+  LLVMType ElTy = anonymous_366;
   string NAME = ?;
 }
-def anonymous_369 {	// IntrinsicProperty NoCapture
+def anonymous_368 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
+  string NAME = ?;
+}
+def anonymous_369 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_37 {	// LLVMType LLVMMatchType
@@ -6271,49 +6240,48 @@ def anonymous_37 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_370 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
-  string NAME = ?;
-}
-def anonymous_371 {	// LLVMType LLVMAnyPointerType
+def anonymous_370 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_370;
+  LLVMType ElTy = anonymous_369;
   string NAME = ?;
 }
-def anonymous_372 {	// IntrinsicProperty NoCapture
+def anonymous_371 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_373 {	// LLVMType LLVMMatchType
+def anonymous_372 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_374 {	// LLVMType LLVMAnyPointerType
+def anonymous_373 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_373;
+  LLVMType ElTy = anonymous_372;
   string NAME = ?;
 }
-def anonymous_375 {	// IntrinsicProperty NoCapture
+def anonymous_374 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_376 {	// LLVMType LLVMMatchType
+def anonymous_375 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_377 {	// LLVMType LLVMAnyPointerType
+def anonymous_376 {	// LLVMType LLVMAnyPointerType
   ValueType VT = iPTRAny;
-  LLVMType ElTy = anonymous_376;
+  LLVMType ElTy = anonymous_375;
+  string NAME = ?;
+}
+def anonymous_377 {	// IntrinsicProperty NoCapture
+  int ArgNo = 0;
   string NAME = ?;
 }
 def anonymous_378 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_379 {	// IntrinsicProperty NoCapture
+def anonymous_379 {	// IntrinsicProperty ReadOnly
   int ArgNo = 0;
   string NAME = ?;
 }
@@ -6322,26 +6290,27 @@ def anonymous_38 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_380 {	// IntrinsicProperty ReadOnly
+def anonymous_380 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_381 {	// IntrinsicProperty NoCapture
+def anonymous_381 {	// IntrinsicProperty WriteOnly
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_382 {	// IntrinsicProperty WriteOnly
+def anonymous_382 {	// IntrinsicProperty NoCapture
   int ArgNo = 0;
   string NAME = ?;
 }
-def anonymous_383 {	// IntrinsicProperty NoCapture
-  int ArgNo = 0;
-  string NAME = ?;
-}
-def anonymous_384 {	// LLVMType LLVMQualPointerType
+def anonymous_383 {	// LLVMType LLVMQualPointerType
   ValueType VT = iPTR;
   LLVMType ElTy = llvm_i8_ty;
   int AddrSpace = 7;
+  string NAME = ?;
+}
+def anonymous_384 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_385 {	// LLVMType LLVMMatchType
@@ -6349,27 +6318,28 @@ def anonymous_385 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_386 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
+def anonymous_386 {	// LLVMType LLVMQualPointerType
+  ValueType VT = iPTR;
+  LLVMType ElTy = llvm_i8_ty;
+  int AddrSpace = 2;
   string NAME = ?;
 }
 def anonymous_387 {	// LLVMType LLVMQualPointerType
   ValueType VT = iPTR;
   LLVMType ElTy = llvm_i8_ty;
-  int AddrSpace = 4;
+  int AddrSpace = 2;
   string NAME = ?;
 }
 def anonymous_388 {	// LLVMType LLVMQualPointerType
   ValueType VT = iPTR;
   LLVMType ElTy = llvm_i8_ty;
-  int AddrSpace = 4;
+  int AddrSpace = 2;
   string NAME = ?;
 }
 def anonymous_389 {	// LLVMType LLVMQualPointerType
   ValueType VT = iPTR;
   LLVMType ElTy = llvm_i8_ty;
-  int AddrSpace = 4;
+  int AddrSpace = 2;
   string NAME = ?;
 }
 def anonymous_39 {	// LLVMType LLVMMatchType
@@ -6380,13 +6350,12 @@ def anonymous_39 {	// LLVMType LLVMMatchType
 def anonymous_390 {	// LLVMType LLVMQualPointerType
   ValueType VT = iPTR;
   LLVMType ElTy = llvm_i8_ty;
-  int AddrSpace = 4;
+  int AddrSpace = 2;
   string NAME = ?;
 }
-def anonymous_391 {	// LLVMType LLVMQualPointerType
-  ValueType VT = iPTR;
-  LLVMType ElTy = llvm_i8_ty;
-  int AddrSpace = 4;
+def anonymous_391 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_392 {	// LLVMType LLVMMatchType
@@ -6513,23 +6482,23 @@ def anonymous_413 {	// LLVMType LLVMMatchType
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_414 {	// LLVMType LLVMMatchType
+def anonymous_414 {	// IntrinsicProperty NoCapture
+  int ArgNo = 0;
+  string NAME = ?;
+}
+def anonymous_415 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
 }
-def anonymous_415 {	// IntrinsicProperty NoCapture
-  int ArgNo = 0;
+def anonymous_416 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
-def anonymous_416 {	// LLVMType LLVMQualPointerType
-  ValueType VT = iPTR;
-  LLVMType ElTy = llvm_float_ty;
-  int AddrSpace = 3;
-  string NAME = ?;
-}
-def anonymous_417 {	// IntrinsicProperty NoCapture
-  int ArgNo = 0;
+def anonymous_417 {	// LLVMType LLVMMatchType
+  ValueType VT = OtherVT;
+  int Number = 0;
   string NAME = ?;
 }
 def anonymous_418 {	// LLVMType LLVMMatchType
@@ -6603,26 +6572,6 @@ def anonymous_43 {	// LLVMType LLVMMatchType
   string NAME = ?;
 }
 def anonymous_430 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
-  string NAME = ?;
-}
-def anonymous_431 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
-  string NAME = ?;
-}
-def anonymous_432 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
-  string NAME = ?;
-}
-def anonymous_433 {	// LLVMType LLVMMatchType
-  ValueType VT = OtherVT;
-  int Number = 0;
-  string NAME = ?;
-}
-def anonymous_434 {	// LLVMType LLVMMatchType
   ValueType VT = OtherVT;
   int Number = 0;
   string NAME = ?;
@@ -7398,14 +7347,14 @@ def int_aarch64_ldxr {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_aarch64_neon_abs {	// SDPatternOperator Intrinsic AdvSIMD_1Arg_Intrinsic
+def int_aarch64_neon_abs {	// SDPatternOperator Intrinsic AdvSIMD_1IntArg_Intrinsic
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_any_ty];
-  list<LLVMType> ParamTypes = [anonymous_234];
+  list<LLVMType> RetTypes = [llvm_anyint_ty];
+  list<LLVMType> ParamTypes = [anonymous_203];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -7626,14 +7575,14 @@ def int_aarch64_neon_fcvtzu {	// SDPatternOperator Intrinsic AdvSIMD_FPToIntRoun
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_aarch64_neon_fmax {	// SDPatternOperator Intrinsic AdvSIMD_2FloatArg_Intrinsic
+def int_aarch64_neon_fmax {	// SDPatternOperator Intrinsic AdvSIMD_2VectorArg_Intrinsic
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_210, anonymous_211];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty];
+  list<LLVMType> ParamTypes = [anonymous_212, anonymous_213];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -7698,14 +7647,14 @@ def int_aarch64_neon_fmaxv {	// SDPatternOperator Intrinsic AdvSIMD_1VectorArg_F
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_aarch64_neon_fmin {	// SDPatternOperator Intrinsic AdvSIMD_2FloatArg_Intrinsic
+def int_aarch64_neon_fmin {	// SDPatternOperator Intrinsic AdvSIMD_2VectorArg_Intrinsic
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_210, anonymous_211];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty];
+  list<LLVMType> ParamTypes = [anonymous_212, anonymous_213];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -7860,8 +7809,8 @@ def int_aarch64_neon_ld1x2 {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Load_In
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_239];
-  list<LLVMType> ParamTypes = [anonymous_241];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_238];
+  list<LLVMType> ParamTypes = [anonymous_240];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7872,8 +7821,8 @@ def int_aarch64_neon_ld1x3 {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Load_In
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_251, anonymous_252];
-  list<LLVMType> ParamTypes = [anonymous_254];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_250, anonymous_251];
+  list<LLVMType> ParamTypes = [anonymous_253];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7884,8 +7833,8 @@ def int_aarch64_neon_ld1x4 {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Load_In
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_268, anonymous_269, anonymous_270];
-  list<LLVMType> ParamTypes = [anonymous_272];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_267, anonymous_268, anonymous_269];
+  list<LLVMType> ParamTypes = [anonymous_271];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7896,8 +7845,8 @@ def int_aarch64_neon_ld2 {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Load_Intr
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_239];
-  list<LLVMType> ParamTypes = [anonymous_241];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_238];
+  list<LLVMType> ParamTypes = [anonymous_240];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7908,8 +7857,8 @@ def int_aarch64_neon_ld2lane {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Load_
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_242];
-  list<LLVMType> ParamTypes = [anonymous_243, anonymous_244, llvm_i64_ty, llvm_anyptr_ty];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_241];
+  list<LLVMType> ParamTypes = [anonymous_242, anonymous_243, llvm_i64_ty, llvm_anyptr_ty];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7920,8 +7869,8 @@ def int_aarch64_neon_ld2r {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Load_Int
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_239];
-  list<LLVMType> ParamTypes = [anonymous_241];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_238];
+  list<LLVMType> ParamTypes = [anonymous_240];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7932,8 +7881,8 @@ def int_aarch64_neon_ld3 {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Load_Intr
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_251, anonymous_252];
-  list<LLVMType> ParamTypes = [anonymous_254];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_250, anonymous_251];
+  list<LLVMType> ParamTypes = [anonymous_253];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7944,8 +7893,8 @@ def int_aarch64_neon_ld3lane {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Load_
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_255, anonymous_256];
-  list<LLVMType> ParamTypes = [anonymous_257, anonymous_258, anonymous_259, llvm_i64_ty, llvm_anyptr_ty];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_254, anonymous_255];
+  list<LLVMType> ParamTypes = [anonymous_256, anonymous_257, anonymous_258, llvm_i64_ty, llvm_anyptr_ty];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7956,8 +7905,8 @@ def int_aarch64_neon_ld3r {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Load_Int
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_251, anonymous_252];
-  list<LLVMType> ParamTypes = [anonymous_254];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_250, anonymous_251];
+  list<LLVMType> ParamTypes = [anonymous_253];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7968,8 +7917,8 @@ def int_aarch64_neon_ld4 {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Load_Intr
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_268, anonymous_269, anonymous_270];
-  list<LLVMType> ParamTypes = [anonymous_272];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_267, anonymous_268, anonymous_269];
+  list<LLVMType> ParamTypes = [anonymous_271];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7980,8 +7929,8 @@ def int_aarch64_neon_ld4lane {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Load_
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_273, anonymous_274, anonymous_275];
-  list<LLVMType> ParamTypes = [anonymous_276, anonymous_277, anonymous_278, anonymous_279, llvm_i64_ty, llvm_anyptr_ty];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_272, anonymous_273, anonymous_274];
+  list<LLVMType> ParamTypes = [anonymous_275, anonymous_276, anonymous_277, anonymous_278, llvm_i64_ty, llvm_anyptr_ty];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -7992,8 +7941,8 @@ def int_aarch64_neon_ld4r {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Load_Int
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "aarch64";
-  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_268, anonymous_269, anonymous_270];
-  list<LLVMType> ParamTypes = [anonymous_272];
+  list<LLVMType> RetTypes = [llvm_anyvector_ty, anonymous_267, anonymous_268, anonymous_269];
+  list<LLVMType> ParamTypes = [anonymous_271];
   list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly];
   bit isTarget = 0;
   string NAME = ?;
@@ -8545,8 +8494,8 @@ def int_aarch64_neon_st1x2 {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Store_I
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_245, anonymous_247];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_248];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_244, anonymous_246];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_247];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8557,8 +8506,8 @@ def int_aarch64_neon_st1x3 {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Store_I
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_260, anonymous_261, anonymous_263];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_264];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_259, anonymous_260, anonymous_262];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_263];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8569,8 +8518,8 @@ def int_aarch64_neon_st1x4 {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Store_I
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_280, anonymous_281, anonymous_282, anonymous_284];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_285];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_279, anonymous_280, anonymous_281, anonymous_283];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_284];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8581,8 +8530,8 @@ def int_aarch64_neon_st2 {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Store_Int
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_245, anonymous_247];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_248];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_244, anonymous_246];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_247];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8593,8 +8542,8 @@ def int_aarch64_neon_st2lane {	// SDPatternOperator Intrinsic AdvSIMD_2Vec_Store
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_249, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_250];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_248, llvm_i64_ty, llvm_anyptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_249];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8605,8 +8554,8 @@ def int_aarch64_neon_st3 {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Store_Int
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_260, anonymous_261, anonymous_263];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_264];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_259, anonymous_260, anonymous_262];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_263];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8617,8 +8566,8 @@ def int_aarch64_neon_st3lane {	// SDPatternOperator Intrinsic AdvSIMD_3Vec_Store
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_265, anonymous_266, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_267];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_264, anonymous_265, llvm_i64_ty, llvm_anyptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_266];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8629,8 +8578,8 @@ def int_aarch64_neon_st4 {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Store_Int
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_280, anonymous_281, anonymous_282, anonymous_284];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_285];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_279, anonymous_280, anonymous_281, anonymous_283];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_284];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8641,8 +8590,8 @@ def int_aarch64_neon_st4lane {	// SDPatternOperator Intrinsic AdvSIMD_4Vec_Store
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_286, anonymous_287, anonymous_288, llvm_i64_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_289];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, anonymous_285, anonymous_286, anonymous_287, llvm_i64_ty, llvm_anyptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_288];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -8677,7 +8626,7 @@ def int_aarch64_neon_tbl1 {	// SDPatternOperator Intrinsic AdvSIMD_Tbl1_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, anonymous_290];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, anonymous_289];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8689,7 +8638,7 @@ def int_aarch64_neon_tbl2 {	// SDPatternOperator Intrinsic AdvSIMD_Tbl2_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, anonymous_291];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, anonymous_290];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8701,7 +8650,7 @@ def int_aarch64_neon_tbl3 {	// SDPatternOperator Intrinsic AdvSIMD_Tbl3_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_292];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_291];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8713,7 +8662,7 @@ def int_aarch64_neon_tbl4 {	// SDPatternOperator Intrinsic AdvSIMD_Tbl4_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_293];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_292];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8725,7 +8674,7 @@ def int_aarch64_neon_tbx1 {	// SDPatternOperator Intrinsic AdvSIMD_Tbx1_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_294, llvm_v16i8_ty, anonymous_295];
+  list<LLVMType> ParamTypes = [anonymous_293, llvm_v16i8_ty, anonymous_294];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8737,7 +8686,7 @@ def int_aarch64_neon_tbx2 {	// SDPatternOperator Intrinsic AdvSIMD_Tbx2_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_296, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_297];
+  list<LLVMType> ParamTypes = [anonymous_295, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_296];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8749,7 +8698,7 @@ def int_aarch64_neon_tbx3 {	// SDPatternOperator Intrinsic AdvSIMD_Tbx3_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_298, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_299];
+  list<LLVMType> ParamTypes = [anonymous_297, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_298];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -8761,7 +8710,7 @@ def int_aarch64_neon_tbx4 {	// SDPatternOperator Intrinsic AdvSIMD_Tbx4_Intrinsi
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [anonymous_300, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_301];
+  list<LLVMType> ParamTypes = [anonymous_299, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, llvm_v16i8_ty, anonymous_300];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -9097,7 +9046,7 @@ def int_aarch64_neon_vcopy_lane {	// SDPatternOperator Intrinsic AdvSIMD_2Vector
   string LLVMName = "";
   string TargetPrefix = "aarch64";
   list<LLVMType> RetTypes = [llvm_anyvector_ty];
-  list<LLVMType> ParamTypes = [llvm_anyvector_ty, llvm_i64_ty, anonymous_235, llvm_i64_ty];
+  list<LLVMType> ParamTypes = [llvm_anyvector_ty, llvm_i64_ty, anonymous_234, llvm_i64_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -9352,8 +9301,8 @@ def int_amdgcn_atomic_dec {	// SDPatternOperator Intrinsic AMDGPUAtomicIncIntrin
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, anonymous_414, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_415];
+  list<LLVMType> ParamTypes = [llvm_anyptr_ty, anonymous_413, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_414];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -9362,8 +9311,8 @@ def int_amdgcn_atomic_inc {	// SDPatternOperator Intrinsic AMDGPUAtomicIncIntrin
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, anonymous_414, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_415];
+  list<LLVMType> ParamTypes = [llvm_anyptr_ty, anonymous_413, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_414];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -9587,7 +9536,7 @@ def int_amdgcn_cos {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_402];
+  list<LLVMType> ParamTypes = [anonymous_401];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -9737,7 +9686,7 @@ def int_amdgcn_dispatch_ptr {	// GCCBuiltin SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [anonymous_387];
+  list<LLVMType> RetTypes = [anonymous_386];
   list<LLVMType> ParamTypes = [];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
@@ -9750,7 +9699,7 @@ def int_amdgcn_div_fixup {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_397, anonymous_398, anonymous_399];
+  list<LLVMType> ParamTypes = [anonymous_396, anonymous_397, anonymous_398];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -9762,7 +9711,7 @@ def int_amdgcn_div_fmas {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_394, anonymous_395, anonymous_396, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [anonymous_393, anonymous_394, anonymous_395, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -9774,7 +9723,7 @@ def int_amdgcn_div_scale {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty, llvm_i1_ty];
-  list<LLVMType> ParamTypes = [anonymous_392, anonymous_393, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [anonymous_391, anonymous_392, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -9789,45 +9738,6 @@ def int_amdgcn_ds_bpermute {	// GCCBuiltin SDPatternOperator Intrinsic
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_amdgcn_ds_fadd {	// GCCBuiltin SDPatternOperator Intrinsic AMDGPULDSF32Intrin
-  string GCCBuiltinName = "__builtin_amdgcn_ds_fadd";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [llvm_float_ty];
-  list<LLVMType> ParamTypes = [anonymous_416, llvm_float_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_417];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_amdgcn_ds_fmax {	// GCCBuiltin SDPatternOperator Intrinsic AMDGPULDSF32Intrin
-  string GCCBuiltinName = "__builtin_amdgcn_ds_fmax";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [llvm_float_ty];
-  list<LLVMType> ParamTypes = [anonymous_416, llvm_float_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_417];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_amdgcn_ds_fmin {	// GCCBuiltin SDPatternOperator Intrinsic AMDGPULDSF32Intrin
-  string GCCBuiltinName = "__builtin_amdgcn_ds_fmin";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [llvm_float_ty];
-  list<LLVMType> ParamTypes = [anonymous_416, llvm_float_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_417];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -9900,7 +9810,7 @@ def int_amdgcn_exp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty, llvm_any_ty, anonymous_418, anonymous_419, anonymous_420, llvm_i1_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty, llvm_any_ty, anonymous_415, anonymous_416, anonymous_417, llvm_i1_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [];
   bit isTarget = 0;
   string NAME = ?;
@@ -9912,7 +9822,7 @@ def int_amdgcn_exp_compr {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty, llvm_anyvector_ty, anonymous_421, llvm_i1_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty, llvm_anyvector_ty, anonymous_418, llvm_i1_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [];
   bit isTarget = 0;
   string NAME = ?;
@@ -9924,7 +9834,7 @@ def int_amdgcn_fcmp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_i64_ty];
-  list<LLVMType> ParamTypes = [llvm_anyfloat_ty, anonymous_425, llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_anyfloat_ty, anonymous_422, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
   bit isTarget = 0;
   string NAME = ?;
@@ -9949,7 +9859,7 @@ def int_amdgcn_fmed3 {	// GCCBuiltin SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_410, anonymous_411, anonymous_412];
+  list<LLVMType> ParamTypes = [anonymous_409, anonymous_410, anonymous_411];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -9974,7 +9884,7 @@ def int_amdgcn_fract {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_409];
+  list<LLVMType> ParamTypes = [anonymous_408];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -9998,7 +9908,7 @@ def int_amdgcn_frexp_mant {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_408];
+  list<LLVMType> ParamTypes = [anonymous_407];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -10023,7 +9933,7 @@ def int_amdgcn_icmp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_i64_ty];
-  list<LLVMType> ParamTypes = [llvm_anyint_ty, anonymous_424, llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_anyint_ty, anonymous_421, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
   bit isTarget = 0;
   string NAME = ?;
@@ -10955,7 +10865,7 @@ def int_amdgcn_implicit_buffer_ptr {	// GCCBuiltin SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [anonymous_391];
+  list<LLVMType> RetTypes = [anonymous_390];
   list<LLVMType> ParamTypes = [];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
@@ -10968,7 +10878,7 @@ def int_amdgcn_implicitarg_ptr {	// GCCBuiltin SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [anonymous_390];
+  list<LLVMType> RetTypes = [anonymous_389];
   list<LLVMType> ParamTypes = [];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
@@ -11044,7 +10954,7 @@ def int_amdgcn_kernarg_segment_ptr {	// GCCBuiltin SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [anonymous_389];
+  list<LLVMType> RetTypes = [anonymous_388];
   list<LLVMType> ParamTypes = [];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
@@ -11069,7 +10979,7 @@ def int_amdgcn_ldexp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_407, llvm_i32_ty];
+  list<LLVMType> ParamTypes = [anonymous_406, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11094,7 +11004,7 @@ def int_amdgcn_log_clamp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_403];
+  list<LLVMType> ParamTypes = [anonymous_402];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11144,7 +11054,7 @@ def int_amdgcn_mov_dpp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_430, llvm_i32_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [anonymous_427, llvm_i32_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
   bit isTarget = 0;
   string NAME = ?;
@@ -11220,7 +11130,7 @@ def int_amdgcn_queue_ptr {	// GCCBuiltin SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [anonymous_388];
+  list<LLVMType> RetTypes = [anonymous_387];
   list<LLVMType> ParamTypes = [];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
@@ -11233,7 +11143,7 @@ def int_amdgcn_rcp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_404];
+  list<LLVMType> ParamTypes = [anonymous_403];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11284,7 +11194,7 @@ def int_amdgcn_rsq {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_405];
+  list<LLVMType> ParamTypes = [anonymous_404];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11296,7 +11206,7 @@ def int_amdgcn_rsq_clamp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_406];
+  list<LLVMType> ParamTypes = [anonymous_405];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11555,7 +11465,7 @@ def int_amdgcn_sbfe {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_423, llvm_i32_ty, llvm_i32_ty];
+  list<LLVMType> ParamTypes = [anonymous_420, llvm_i32_ty, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11567,7 +11477,7 @@ def int_amdgcn_set_inactive {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_428, anonymous_429];
+  list<LLVMType> ParamTypes = [anonymous_425, anonymous_426];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
   bit isTarget = 0;
   string NAME = ?;
@@ -11579,7 +11489,7 @@ def int_amdgcn_sffbh {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_413];
+  list<LLVMType> ParamTypes = [anonymous_412];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11591,7 +11501,7 @@ def int_amdgcn_sin {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_401];
+  list<LLVMType> ParamTypes = [anonymous_400];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11623,7 +11533,7 @@ def int_amdgcn_trig_preop {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_400, llvm_i32_ty];
+  list<LLVMType> ParamTypes = [anonymous_399, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11635,7 +11545,7 @@ def int_amdgcn_ubfe {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_422, llvm_i32_ty, llvm_i32_ty];
+  list<LLVMType> ParamTypes = [anonymous_419, llvm_i32_ty, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11659,7 +11569,7 @@ def int_amdgcn_update_dpp {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_431, anonymous_432, llvm_i32_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [anonymous_428, anonymous_429, llvm_i32_ty, llvm_i32_ty, llvm_i32_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
   bit isTarget = 0;
   string NAME = ?;
@@ -11759,7 +11669,7 @@ def int_amdgcn_wqm {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_any_ty];
-  list<LLVMType> ParamTypes = [anonymous_426];
+  list<LLVMType> ParamTypes = [anonymous_423];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -11776,19 +11686,6 @@ def int_amdgcn_wqm_vote {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_amdgcn_writelane {	// GCCBuiltin SDPatternOperator Intrinsic
-  string GCCBuiltinName = "__builtin_amdgcn_writelane";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "amdgcn";
-  list<LLVMType> RetTypes = [llvm_i32_ty];
-  list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrConvergent];
-  bit isTarget = 0;
-  string NAME = ?;
-}
 def int_amdgcn_wwm {	// SDPatternOperator Intrinsic
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
@@ -11796,7 +11693,7 @@ def int_amdgcn_wwm {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "amdgcn";
   list<LLVMType> RetTypes = [llvm_any_ty];
-  list<LLVMType> ParamTypes = [anonymous_427];
+  list<LLVMType> ParamTypes = [anonymous_424];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -20232,7 +20129,7 @@ def int_hexagon_L2_loadw_locked {	// GCCBuiltin SDPatternOperator Intrinsic Hexa
   string TargetPrefix = "hexagon";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_ptr32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_340];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_339];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -20245,7 +20142,7 @@ def int_hexagon_L4_loadd_locked {	// GCCBuiltin SDPatternOperator Intrinsic Hexa
   string TargetPrefix = "hexagon";
   list<LLVMType> RetTypes = [llvm_i64_ty];
   list<LLVMType> ParamTypes = [llvm_ptr64_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_341];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_340];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -26147,7 +26044,7 @@ def int_hexagon_S2_storew_locked {	// GCCBuiltin SDPatternOperator Intrinsic Hex
   string TargetPrefix = "hexagon";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_ptr32_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_342];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_341];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -26914,7 +26811,7 @@ def int_hexagon_S4_stored_locked {	// GCCBuiltin SDPatternOperator Intrinsic Hex
   string TargetPrefix = "hexagon";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_ptr64_ty, llvm_i64_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_343];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_342];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -38033,18 +37930,6 @@ def int_hexagon_prefetch {	// GCCBuiltin SDPatternOperator Intrinsic Hexagon_Int
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_icall_branch_funnel {	// SDPatternOperator Intrinsic
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "";
-  list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_vararg_ty];
-  list<IntrinsicProperty> IntrProperties = [];
-  bit isTarget = 0;
-  string NAME = ?;
-}
 def int_init_trampoline {	// SDPatternOperator Intrinsic GCCBuiltin
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
@@ -38346,7 +38231,7 @@ def int_memcpy {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty, llvm_i32_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_4, anonymous_5, anonymous_6, anonymous_7];
   bit isTarget = 0;
   string NAME = ?;
@@ -38370,7 +38255,7 @@ def int_memmove {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty, llvm_i32_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_8, anonymous_9, anonymous_10];
   bit isTarget = 0;
   string NAME = ?;
@@ -38394,7 +38279,7 @@ def int_memset {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i8_ty, llvm_anyint_ty, llvm_i1_ty];
+  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i8_ty, llvm_anyint_ty, llvm_i32_ty, llvm_i1_ty];
   list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_11, anonymous_12];
   bit isTarget = 0;
   string NAME = ?;
@@ -47270,8 +47155,8 @@ def int_nvvm_atomic_add_gen_f_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_add_gen";
 }
@@ -47282,8 +47167,8 @@ def int_nvvm_atomic_add_gen_f_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_add_gen";
 }
@@ -47294,8 +47179,8 @@ def int_nvvm_atomic_add_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_add_gen";
 }
@@ -47306,8 +47191,8 @@ def int_nvvm_atomic_add_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_add_gen";
 }
@@ -47318,8 +47203,8 @@ def int_nvvm_atomic_and_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_and_gen_i";
 }
@@ -47330,8 +47215,8 @@ def int_nvvm_atomic_and_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_and_gen_i";
 }
@@ -47342,8 +47227,8 @@ def int_nvvm_atomic_cas_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_357, anonymous_358, anonymous_359];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_360];
+  list<LLVMType> ParamTypes = [anonymous_356, anonymous_357, anonymous_358];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_359];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_cas_gen_i";
 }
@@ -47354,8 +47239,8 @@ def int_nvvm_atomic_cas_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_357, anonymous_358, anonymous_359];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_360];
+  list<LLVMType> ParamTypes = [anonymous_356, anonymous_357, anonymous_358];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_359];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_cas_gen_i";
 }
@@ -47366,8 +47251,8 @@ def int_nvvm_atomic_dec_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_dec_gen_i";
 }
@@ -47378,8 +47263,8 @@ def int_nvvm_atomic_dec_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_dec_gen_i";
 }
@@ -47390,8 +47275,8 @@ def int_nvvm_atomic_exch_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMI
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_exch_gen_i";
 }
@@ -47402,8 +47287,8 @@ def int_nvvm_atomic_exch_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMI
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_exch_gen_i";
 }
@@ -47414,8 +47299,8 @@ def int_nvvm_atomic_inc_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_inc_gen_i";
 }
@@ -47426,8 +47311,8 @@ def int_nvvm_atomic_inc_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_inc_gen_i";
 }
@@ -47438,8 +47323,8 @@ def int_nvvm_atomic_load_add_f32 {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty];
-  list<LLVMType> ParamTypes = [anonymous_344, llvm_float_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_345];
+  list<LLVMType> ParamTypes = [anonymous_343, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_344];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -47450,8 +47335,8 @@ def int_nvvm_atomic_load_add_f64 {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_double_ty];
-  list<LLVMType> ParamTypes = [anonymous_346, llvm_double_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_347];
+  list<LLVMType> ParamTypes = [anonymous_345, llvm_double_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_346];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -47462,8 +47347,8 @@ def int_nvvm_atomic_load_dec_32 {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_i32_ty];
-  list<LLVMType> ParamTypes = [anonymous_350, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_351];
+  list<LLVMType> ParamTypes = [anonymous_349, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_350];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -47474,8 +47359,8 @@ def int_nvvm_atomic_load_inc_32 {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_i32_ty];
-  list<LLVMType> ParamTypes = [anonymous_348, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_349];
+  list<LLVMType> ParamTypes = [anonymous_347, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_348];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -47486,8 +47371,8 @@ def int_nvvm_atomic_max_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_max_gen_i";
 }
@@ -47498,8 +47383,8 @@ def int_nvvm_atomic_max_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_max_gen_i";
 }
@@ -47510,8 +47395,8 @@ def int_nvvm_atomic_min_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_min_gen_i";
 }
@@ -47522,8 +47407,8 @@ def int_nvvm_atomic_min_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_min_gen_i";
 }
@@ -47534,8 +47419,8 @@ def int_nvvm_atomic_or_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC2
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_or_gen_i";
 }
@@ -47546,8 +47431,8 @@ def int_nvvm_atomic_or_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC2
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_or_gen_i";
 }
@@ -47558,8 +47443,8 @@ def int_nvvm_atomic_xor_gen_i_cta {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_xor_gen_i";
 }
@@ -47570,8 +47455,8 @@ def int_nvvm_atomic_xor_gen_i_sys {	// SDPatternOperator Intrinsic SCOPED_ATOMIC
   string LLVMName = "";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_353, anonymous_354];
-  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_355];
+  list<LLVMType> ParamTypes = [anonymous_352, anonymous_353];
+  list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly, anonymous_354];
   bit isTarget = 0;
   string NAME = "int_nvvm_atomic_xor_gen_i";
 }
@@ -49364,8 +49249,8 @@ def int_nvvm_ldg_global_f {	// SDPatternOperator Intrinsic
   string LLVMName = "llvm.nvvm.ldg.global.f";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_374, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_375];
+  list<LLVMType> ParamTypes = [anonymous_373, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_374];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -49375,8 +49260,8 @@ def int_nvvm_ldg_global_i {	// SDPatternOperator Intrinsic
   string LLVMName = "llvm.nvvm.ldg.global.i";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_371, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_372];
+  list<LLVMType> ParamTypes = [anonymous_370, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_371];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -49386,8 +49271,8 @@ def int_nvvm_ldg_global_p {	// SDPatternOperator Intrinsic
   string LLVMName = "llvm.nvvm.ldg.global.p";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyptr_ty];
-  list<LLVMType> ParamTypes = [anonymous_377, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_378];
+  list<LLVMType> ParamTypes = [anonymous_376, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_377];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -49397,8 +49282,8 @@ def int_nvvm_ldu_global_f {	// SDPatternOperator Intrinsic
   string LLVMName = "llvm.nvvm.ldu.global.f";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_365, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_366];
+  list<LLVMType> ParamTypes = [anonymous_364, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_365];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -49408,8 +49293,8 @@ def int_nvvm_ldu_global_i {	// SDPatternOperator Intrinsic
   string LLVMName = "llvm.nvvm.ldu.global.i";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_362, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_363];
+  list<LLVMType> ParamTypes = [anonymous_361, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_362];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -49419,8 +49304,8 @@ def int_nvvm_ldu_global_p {	// SDPatternOperator Intrinsic
   string LLVMName = "llvm.nvvm.ldu.global.p";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyptr_ty];
-  list<LLVMType> ParamTypes = [anonymous_368, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_369];
+  list<LLVMType> ParamTypes = [anonymous_367, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_368];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -49727,7 +49612,7 @@ def int_nvvm_move_ptr {	// SDPatternOperator Intrinsic
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_anyptr_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, anonymous_379];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem, anonymous_378];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -58403,645 +58288,1189 @@ def int_nvvm_vote_uni_sync {	// SDPatternOperator Intrinsic GCCBuiltin
   string GCCBuiltinName = "__nvvm_vote_uni_sync";
   string NAME = ?;
 }
-def int_nvvm_wmma_m16n16k16_load_a_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _col _a_f16_col _m16n16k16_load_a_f16_col
+def int_nvvm_wmma_load_a_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _col
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.a.col.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.col.m16n16k16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_a_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _col_stride _a_f16_col_stride _m16n16k16_load_a_f16_col_stride
+def int_nvvm_wmma_load_a_f16_col_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _col_global
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.a.col.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.col.m16n16k16.global.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_a_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _row _a_f16_row _m16n16k16_load_a_f16_row
+def int_nvvm_wmma_load_a_f16_col_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _col_global_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.a.row.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.col.m16n16k16.global.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_a_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _row_stride _a_f16_row_stride _m16n16k16_load_a_f16_row_stride
+def int_nvvm_wmma_load_a_f16_col_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _col_shared
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.a.row.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.col.m16n16k16.shared.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_b_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _col _b_f16_col _m16n16k16_load_b_f16_col
+def int_nvvm_wmma_load_a_f16_col_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _col_shared_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.b.col.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.col.m16n16k16.shared.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_b_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _col_stride _b_f16_col_stride _m16n16k16_load_b_f16_col_stride
+def int_nvvm_wmma_load_a_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _col_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.b.col.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.col.m16n16k16.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_b_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _row _b_f16_row _m16n16k16_load_b_f16_row
+def int_nvvm_wmma_load_a_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _row
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.b.row.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.row.m16n16k16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_b_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _row_stride _b_f16_row_stride _m16n16k16_load_b_f16_row_stride
+def int_nvvm_wmma_load_a_f16_row_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _row_global
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.b.row.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.row.m16n16k16.global.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_a_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _col _c_f16_col _m16n16k16_load_c_f16_col
+def int_nvvm_wmma_load_a_f16_row_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _row_global_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.col.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.row.m16n16k16.global.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_a_f16";
+}
+def int_nvvm_wmma_load_a_f16_row_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _row_shared
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.row.m16n16k16.shared.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_a_f16";
+}
+def int_nvvm_wmma_load_a_f16_row_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _row_shared_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.row.m16n16k16.shared.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_a_f16";
+}
+def int_nvvm_wmma_load_a_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _row_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.a.sync.row.m16n16k16.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_a_f16";
+}
+def int_nvvm_wmma_load_b_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _col
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.col.m16n16k16.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_col_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _col_global
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.col.m16n16k16.global.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_col_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _col_global_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.col.m16n16k16.global.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_col_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _col_shared
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.col.m16n16k16.shared.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_col_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _col_shared_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.col.m16n16k16.shared.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _col_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.col.m16n16k16.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _row
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.row.m16n16k16.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_row_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _row_global
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.row.m16n16k16.global.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_row_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _row_global_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.row.m16n16k16.global.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_row_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _row_shared
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.row.m16n16k16.shared.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_row_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _row_shared_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.row.m16n16k16.shared.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_b_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _row_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.b.sync.row.m16n16k16.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_b_f16";
+}
+def int_nvvm_wmma_load_c_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _col
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _col_stride _c_f16_col_stride _m16n16k16_load_c_f16_col_stride
+def int_nvvm_wmma_load_c_f16_col_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _col_global
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.col.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.global.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _row _c_f16_row _m16n16k16_load_c_f16_row
+def int_nvvm_wmma_load_c_f16_col_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _col_global_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.row.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.global.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _row_stride _c_f16_row_stride _m16n16k16_load_c_f16_row_stride
+def int_nvvm_wmma_load_c_f16_col_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _col_shared
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.row.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.shared.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f16";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f32_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _col _c_f32_col _m16n16k16_load_c_f32_col
+def int_nvvm_wmma_load_c_f16_col_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _col_shared_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.col.f32";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.shared.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _col_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _row
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_row_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _row_global
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.global.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_row_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _row_global_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.global.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_row_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _row_shared
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.shared.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_row_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _row_shared_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.shared.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _row_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f16";
+}
+def int_nvvm_wmma_load_c_f32_col {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _col
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f32";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f32_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _col_stride _c_f32_col_stride _m16n16k16_load_c_f32_col_stride
+def int_nvvm_wmma_load_c_f32_col_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _col_global
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.col.stride.f32";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.global.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f32";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f32_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS NAME _row _c_f32_row _m16n16k16_load_c_f32_row
+def int_nvvm_wmma_load_c_f32_col_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _col_global_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.row.f32";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.global.stride.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f32";
 }
-def int_nvvm_wmma_m16n16k16_load_c_f32_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_GALSTS _stride _row_stride _c_f32_row_stride _m16n16k16_load_c_f32_row_stride
+def int_nvvm_wmma_load_c_f32_col_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _col_shared
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.load.c.row.stride.f32";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.shared.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_380, anonymous_381];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_load_c_f32";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f16_f16 _col_f16_f16 _col_col_f16_f16 _m16n16k16_mma_col_col_f16_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_load_c_f32_col_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _col_shared_stride
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f16.f16";
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.shared.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _col_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.col.m16n16k16.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_row {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME NAME _row
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_row_global {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _global _row_global
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.global.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_row_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _global_stride _row_global_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.global.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_row_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS NAME _shared _row_shared
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.shared.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_row_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride _shared_stride _row_shared_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.shared.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_load_c_f32_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_LD_ALSTS _stride !strconcat(!cast<string>(NAME), "_stride") _row_stride
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.load.c.sync.row.m16n16k16.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrReadMem, IntrArgMemOnly, anonymous_379, anonymous_380];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_load_c_f32";
+}
+def int_nvvm_wmma_mma_sync_col_col_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f16_f16 _col_f16_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f16_f16_satfinite _col_f16_f16_satfinite _col_col_f16_f16_satfinite _m16n16k16_mma_col_col_f16_f16_satfinite
+def int_nvvm_wmma_mma_sync_col_col_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f16_f16_satfinite _col_f16_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f16.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f16.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f16_f32 _col_f16_f32 _col_col_f16_f32 _m16n16k16_mma_col_col_f16_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_col_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f16_f32 _col_f16_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f16.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f16.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f16_f32_satfinite _col_f16_f32_satfinite _col_col_f16_f32_satfinite _m16n16k16_mma_col_col_f16_f32_satfinite
+def int_nvvm_wmma_mma_sync_col_col_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f16_f32_satfinite _col_f16_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f16.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f16.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f32_f16 _col_f32_f16 _col_col_f32_f16 _m16n16k16_mma_col_col_f32_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_col_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f32_f16 _col_f32_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f32.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f32.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f32_f16_satfinite _col_f32_f16_satfinite _col_col_f32_f16_satfinite _m16n16k16_mma_col_col_f32_f16_satfinite
+def int_nvvm_wmma_mma_sync_col_col_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f32_f16_satfinite _col_f32_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f32.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f32.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f32_f32 _col_f32_f32 _col_col_f32_f32 _m16n16k16_mma_col_col_f32_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_col_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f32_f32 _col_f32_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f32.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f32.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_col_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f32_f32_satfinite _col_f32_f32_satfinite _col_col_f32_f32_satfinite _m16n16k16_mma_col_col_f32_f32_satfinite
+def int_nvvm_wmma_mma_sync_col_col_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f32_f32_satfinite _col_f32_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.col.f32.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.col.m16n16k16.f32.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f16_f16 _row_f16_f16 _col_row_f16_f16 _m16n16k16_mma_col_row_f16_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_row_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f16_f16 _row_f16_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f16.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f16_f16_satfinite _row_f16_f16_satfinite _col_row_f16_f16_satfinite _m16n16k16_mma_col_row_f16_f16_satfinite
+def int_nvvm_wmma_mma_sync_col_row_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f16_f16_satfinite _row_f16_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f16.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f16.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f16_f32 _row_f16_f32 _col_row_f16_f32 _m16n16k16_mma_col_row_f16_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_row_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f16_f32 _row_f16_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f16.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f16.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f16_f32_satfinite _row_f16_f32_satfinite _col_row_f16_f32_satfinite _m16n16k16_mma_col_row_f16_f32_satfinite
+def int_nvvm_wmma_mma_sync_col_row_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f16_f32_satfinite _row_f16_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f16.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f16.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f32_f16 _row_f32_f16 _col_row_f32_f16 _m16n16k16_mma_col_row_f32_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_row_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f32_f16 _row_f32_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f32.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f32.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f32_f16_satfinite _row_f32_f16_satfinite _col_row_f32_f16_satfinite _m16n16k16_mma_col_row_f32_f16_satfinite
+def int_nvvm_wmma_mma_sync_col_row_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f32_f16_satfinite _row_f32_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f32.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f32.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f32_f32 _row_f32_f32 _col_row_f32_f32 _m16n16k16_mma_col_row_f32_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_col_row_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f32_f32 _row_f32_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f32.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f32.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_col_row_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f32_f32_satfinite _row_f32_f32_satfinite _col_row_f32_f32_satfinite _m16n16k16_mma_col_row_f32_f32_satfinite
+def int_nvvm_wmma_mma_sync_col_row_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f32_f32_satfinite _row_f32_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.col.row.f32.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.col.row.m16n16k16.f32.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_col";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f16_f16 _col_f16_f16 _row_col_f16_f16 _m16n16k16_mma_row_col_f16_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_col_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f16_f16 _col_f16_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f16.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f16_f16_satfinite _col_f16_f16_satfinite _row_col_f16_f16_satfinite _m16n16k16_mma_row_col_f16_f16_satfinite
+def int_nvvm_wmma_mma_sync_row_col_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f16_f16_satfinite _col_f16_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f16.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f16.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f16_f32 _col_f16_f32 _row_col_f16_f32 _m16n16k16_mma_row_col_f16_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_col_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f16_f32 _col_f16_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f16.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f16.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f16_f32_satfinite _col_f16_f32_satfinite _row_col_f16_f32_satfinite _m16n16k16_mma_row_col_f16_f32_satfinite
+def int_nvvm_wmma_mma_sync_row_col_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f16_f32_satfinite _col_f16_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f16.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f16.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f32_f16 _col_f32_f16 _row_col_f32_f16 _m16n16k16_mma_row_col_f32_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_col_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f32_f16 _col_f32_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f32.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f32.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f32_f16_satfinite _col_f32_f16_satfinite _row_col_f32_f16_satfinite _m16n16k16_mma_row_col_f32_f16_satfinite
+def int_nvvm_wmma_mma_sync_row_col_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f32_f16_satfinite _col_f32_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f32.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f32.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f32_f32 _col_f32_f32 _row_col_f32_f32 _m16n16k16_mma_row_col_f32_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_col_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f32_f32 _col_f32_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f32.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f32.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_col_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f32_f32_satfinite _col_f32_f32_satfinite _row_col_f32_f32_satfinite _m16n16k16_mma_row_col_f32_f32_satfinite
+def int_nvvm_wmma_mma_sync_row_col_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f32_f32_satfinite _col_f32_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.col.f32.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.col.m16n16k16.f32.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f16_f16 _row_f16_f16 _row_row_f16_f16 _m16n16k16_mma_row_row_f16_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_row_f16_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f16_f16 _row_f16_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f16.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f16_f16_satfinite _row_f16_f16_satfinite _row_row_f16_f16_satfinite _m16n16k16_mma_row_row_f16_f16_satfinite
+def int_nvvm_wmma_mma_sync_row_row_f16_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f16_f16_satfinite _row_f16_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f16.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f16.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f16_f32 _row_f16_f32 _row_row_f16_f32 _m16n16k16_mma_row_row_f16_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_row_f16_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f16_f32 _row_f16_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f16.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f16.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f16_f32_satfinite _row_f16_f32_satfinite _row_row_f16_f32_satfinite _m16n16k16_mma_row_row_f16_f32_satfinite
+def int_nvvm_wmma_mma_sync_row_row_f16_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f16_f32_satfinite _row_f16_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f16.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f16.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f16 _f32_f16 _row_f32_f16 _row_row_f32_f16 _m16n16k16_mma_row_row_f32_f16
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_row_f32_f16 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f16 _f32_f16 _row_f32_f16
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f32.f16";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f32.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f16_satfinite _f32_f16_satfinite _row_f32_f16_satfinite _row_row_f32_f16_satfinite _m16n16k16_mma_row_row_f32_f16_satfinite
+def int_nvvm_wmma_mma_sync_row_row_f32_f16_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f16_satfinite _f32_f16_satfinite _row_f32_f16_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f32.f16.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f32.f16.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS NAME _f32 _f32_f32 _row_f32_f32 _row_row_f32_f32 _m16n16k16_mma_row_row_f32_f32
-  string NVVM_WMMA_MMA_GABDCS:Satfinite = "";
+def int_nvvm_wmma_mma_sync_row_row_f32_f32 {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS NAME _f32 _f32_f32 _row_f32_f32
+  string NVVM_WMMA_MMA_ABDCS:Satfinite = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f32.f32";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f32.f32";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_mma_row_row_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_GABDCS _satfinite _f32_satfinite _f32_f32_satfinite _row_f32_f32_satfinite _row_row_f32_f32_satfinite _m16n16k16_mma_row_row_f32_f32_satfinite
+def int_nvvm_wmma_mma_sync_row_row_f32_f32_satfinite {	// SDPatternOperator Intrinsic NVVM_WMMA_MMA_ABDCS _satfinite _f32_satfinite _f32_f32_satfinite _row_f32_f32_satfinite
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.mma.row.row.f32.f32.satfinite";
+  string LLVMName = "llvm.nvvm.wmma.mma.sync.row.row.m16n16k16.f32.f32.satfinite";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<LLVMType> ParamTypes = [llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_mma_sync_row";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS NAME _col _d_f16_col _m16n16k16_store_d_f16_col
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_col {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME NAME _col
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.col.f16";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS _stride _col_stride _d_f16_col_stride _m16n16k16_store_d_f16_col_stride
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_col_global {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _global _col_global
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.col.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.global.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS NAME _row _d_f16_row _m16n16k16_store_d_f16_row
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_col_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _global_stride _col_global_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.row.f16";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.global.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS _stride _row_stride _d_f16_row_stride _m16n16k16_store_d_f16_row_stride
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_col_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _shared _col_shared
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.row.stride.f16";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.shared.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f32_col {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS NAME _col _d_f32_col _m16n16k16_store_d_f32_col
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_col_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _shared_stride _col_shared_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.col.f32";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.shared.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f32_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS _stride _col_stride _d_f32_col_stride _m16n16k16_store_d_f32_col_stride
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride !strconcat(!cast<string>(NAME), "_stride") _col_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.col.stride.f32";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.stride.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f32_row {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS NAME _row _d_f32_row _m16n16k16_store_d_f32_row
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_row {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME NAME _row
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.row.f32";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
 }
-def int_nvvm_wmma_m16n16k16_store_d_f32_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_GLSTS _stride _row_stride _d_f32_row_stride _m16n16k16_store_d_f32_row_stride
-  list<LLVMType> NVVM_WMMA_STD_GLSTS:Empty = [];
+def int_nvvm_wmma_store_d_f16_row_global {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _global _row_global
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
-  string LLVMName = "llvm.nvvm.wmma.m16n16k16.store.d.row.stride.f32";
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.global.f16";
   string TargetPrefix = "nvvm";
   list<LLVMType> RetTypes = [];
-  list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_382, anonymous_383];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
   bit isTarget = 0;
-  string NAME = "int_nvvm_wmma";
+  string NAME = "int_nvvm_wmma_store_d_f16";
+}
+def int_nvvm_wmma_store_d_f16_row_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _global_stride _row_global_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.global.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f16";
+}
+def int_nvvm_wmma_store_d_f16_row_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _shared _row_shared
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.shared.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f16";
+}
+def int_nvvm_wmma_store_d_f16_row_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _shared_stride _row_shared_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.shared.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f16";
+}
+def int_nvvm_wmma_store_d_f16_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride !strconcat(!cast<string>(NAME), "_stride") _row_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.stride.f16";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_v2f16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f16";
+}
+def int_nvvm_wmma_store_d_f32_col {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME NAME _col
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_col_global {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _global _col_global
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.global.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_col_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _global_stride _col_global_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.global.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_col_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _shared _col_shared
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.shared.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_col_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _shared_stride _col_shared_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.shared.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_col_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride !strconcat(!cast<string>(NAME), "_stride") _col_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.col.m16n16k16.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_row {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME NAME _row
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_row_global {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _global _row_global
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.global.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_row_global_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _global_stride _row_global_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.global.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_row_shared {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS NAME _shared _row_shared
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.shared.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_row_shared_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride _shared_stride _row_shared_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.shared.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
+}
+def int_nvvm_wmma_store_d_f32_row_stride {	// SDPatternOperator Intrinsic NVVM_WMMA_STD_LSTS _stride !strconcat(!cast<string>(NAME), "_stride") _row_stride
+  list<LLVMType> NVVM_WMMA_STD_LSTS:Empty = [];
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "llvm.nvvm.wmma.store.d.sync.row.m16n16k16.stride.f32";
+  string TargetPrefix = "nvvm";
+  list<LLVMType> RetTypes = [];
+  list<LLVMType> ParamTypes = [llvm_ptr_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_float_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrWriteMem, IntrArgMemOnly, anonymous_381, anonymous_382];
+  bit isTarget = 0;
+  string NAME = "int_nvvm_wmma_store_d_f32";
 }
 def int_objectsize {	// SDPatternOperator Intrinsic GCCBuiltin
   string Intrinsic:name = "";
@@ -62085,7 +62514,7 @@ def int_ppc_is_decremented_ctr_nonzero {	// SDPatternOperator Intrinsic
   string TargetPrefix = "ppc";
   list<LLVMType> RetTypes = [llvm_i1_ty];
   list<LLVMType> ParamTypes = [];
-  list<IntrinsicProperty> IntrProperties = [];
+  list<IntrinsicProperty> IntrProperties = [IntrNoDuplicate];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -64259,7 +64688,7 @@ def int_r600_implicitarg_ptr {	// GCCBuiltin SDPatternOperator Intrinsic
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "r600";
-  list<LLVMType> RetTypes = [anonymous_384];
+  list<LLVMType> RetTypes = [anonymous_383];
   list<LLVMType> ParamTypes = [];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
@@ -64474,7 +64903,7 @@ def int_r600_recipsqrt_clamped {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "r600";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_386];
+  list<LLVMType> ParamTypes = [anonymous_385];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -64486,7 +64915,7 @@ def int_r600_recipsqrt_ieee {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "r600";
   list<LLVMType> RetTypes = [llvm_anyfloat_ty];
-  list<LLVMType> ParamTypes = [anonymous_385];
+  list<LLVMType> ParamTypes = [anonymous_384];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem, IntrSpeculatable];
   bit isTarget = 0;
   string NAME = ?;
@@ -67683,30 +68112,6 @@ def int_wasm_current_memory {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_wasm_get_ehselector {	// SDPatternOperator Intrinsic
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "wasm";
-  list<LLVMType> RetTypes = [llvm_i32_ty];
-  list<LLVMType> ParamTypes = [];
-  list<IntrinsicProperty> IntrProperties = [IntrHasSideEffects];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_wasm_get_exception {	// SDPatternOperator Intrinsic
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "wasm";
-  list<LLVMType> RetTypes = [llvm_ptr_ty];
-  list<LLVMType> ParamTypes = [];
-  list<IntrinsicProperty> IntrProperties = [IntrHasSideEffects];
-  bit isTarget = 0;
-  string NAME = ?;
-}
 def int_wasm_grow_memory {	// SDPatternOperator Intrinsic
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
@@ -67714,32 +68119,8 @@ def int_wasm_grow_memory {	// SDPatternOperator Intrinsic
   string LLVMName = "";
   string TargetPrefix = "wasm";
   list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [anonymous_434];
+  list<LLVMType> ParamTypes = [anonymous_430];
   list<IntrinsicProperty> IntrProperties = [];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_wasm_mem_grow {	// SDPatternOperator Intrinsic
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "wasm";
-  list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [llvm_i32_ty, anonymous_433];
-  list<IntrinsicProperty> IntrProperties = [];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_wasm_mem_size {	// SDPatternOperator Intrinsic
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "wasm";
-  list<LLVMType> RetTypes = [llvm_anyint_ty];
-  list<LLVMType> ParamTypes = [llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrReadMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -67751,7 +68132,7 @@ def int_wasm_rethrow {	// SDPatternOperator Intrinsic
   string TargetPrefix = "wasm";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [];
-  list<IntrinsicProperty> IntrProperties = [Throws, IntrNoReturn];
+  list<IntrinsicProperty> IntrProperties = [Throws];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -67763,7 +68144,7 @@ def int_wasm_throw {	// SDPatternOperator Intrinsic
   string TargetPrefix = "wasm";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [Throws, IntrNoReturn];
+  list<IntrinsicProperty> IntrProperties = [Throws];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -69506,6 +69887,123 @@ def int_x86_avx512_broadcastmw_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
+def int_x86_avx512_cvtb2mask_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtb2mask128";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16i8_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtb2mask_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtb2mask256";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_v32i8_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtb2mask_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtb2mask512";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i64_ty];
+  list<LLVMType> ParamTypes = [llvm_v64i8_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtd2mask_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtd2mask128";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v4i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtd2mask_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtd2mask256";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v8i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtd2mask_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtd2mask512";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtq2mask_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtq2mask128";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v2i64_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtq2mask_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtq2mask256";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v4i64_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtq2mask_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtq2mask512";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v8i64_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
 def int_x86_avx512_cvtsi2sd64 {	// GCCBuiltin SDPatternOperator Intrinsic
   string GCCBuiltinName = "__builtin_ia32_cvtsi2sd64";
   string Intrinsic:name = "";
@@ -69697,6 +70195,45 @@ def int_x86_avx512_cvtusi642ss {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4f32_ty];
   list<LLVMType> ParamTypes = [llvm_v4f32_ty, llvm_i64_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtw2mask_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtw2mask128";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v8i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtw2mask_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtw2mask256";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_cvtw2mask_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtw2mask512";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_v32i16_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -70088,6 +70625,143 @@ def int_x86_avx512_gatherpf_qps_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_i8_ty, llvm_v8i64_ty, llvm_ptr_ty, llvm_i32_ty, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrArgMemOnly];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kand_w {	// SDPatternOperator Intrinsic
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kandn_w {	// SDPatternOperator Intrinsic
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_knot_w {	// SDPatternOperator Intrinsic
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kor_w {	// SDPatternOperator Intrinsic
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kortestc_w {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_kortestchi";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kortestz_w {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_kortestzhi";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kunpck_bw {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_kunpckhi";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kunpck_dq {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_kunpckdi";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i64_ty];
+  list<LLVMType> ParamTypes = [llvm_i64_ty, llvm_i64_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kunpck_wd {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_kunpcksi";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i32_ty];
+  list<LLVMType> ParamTypes = [llvm_i32_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kxnor_w {	// SDPatternOperator Intrinsic
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_kxor_w {	// SDPatternOperator Intrinsic
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -70611,74 +71285,80 @@ def int_x86_avx512_mask_add_ss_round {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cmp_pd_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cmp_pd_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cmppd128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v2i1_ty];
-  list<LLVMType> ParamTypes = [llvm_v2f64_ty, llvm_v2f64_ty, llvm_i32_ty];
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v2f64_ty, llvm_v2f64_ty, llvm_i32_ty, llvm_i8_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cmp_pd_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cmp_pd_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cmppd256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v4i1_ty];
-  list<LLVMType> ParamTypes = [llvm_v4f64_ty, llvm_v4f64_ty, llvm_i32_ty];
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v4f64_ty, llvm_v4f64_ty, llvm_i32_ty, llvm_i8_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cmp_pd_512 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cmp_pd_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cmppd512_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v8i1_ty];
-  list<LLVMType> ParamTypes = [llvm_v8f64_ty, llvm_v8f64_ty, llvm_i32_ty, llvm_i32_ty];
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v8f64_ty, llvm_v8f64_ty, llvm_i32_ty, llvm_i8_ty, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cmp_ps_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cmp_ps_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cmpps128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v4i1_ty];
-  list<LLVMType> ParamTypes = [llvm_v4f32_ty, llvm_v4f32_ty, llvm_i32_ty];
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v4f32_ty, llvm_v4f32_ty, llvm_i32_ty, llvm_i8_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cmp_ps_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cmp_ps_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cmpps256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v8i1_ty];
-  list<LLVMType> ParamTypes = [llvm_v8f32_ty, llvm_v8f32_ty, llvm_i32_ty];
+  list<LLVMType> RetTypes = [llvm_i8_ty];
+  list<LLVMType> ParamTypes = [llvm_v8f32_ty, llvm_v8f32_ty, llvm_i32_ty, llvm_i8_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cmp_ps_512 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cmp_ps_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cmpps512_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
   string LLVMName = "";
   string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v16i1_ty];
-  list<LLVMType> ParamTypes = [llvm_v16f32_ty, llvm_v16f32_ty, llvm_i32_ty, llvm_i32_ty];
+  list<LLVMType> RetTypes = [llvm_i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16f32_ty, llvm_v16f32_ty, llvm_i32_ty, llvm_i16_ty, llvm_i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
@@ -71255,7 +71935,8 @@ def int_x86_avx512_mask_conflict_q_512 {	// GCCBuiltin SDPatternOperator Intrins
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvtdq2ps_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvtdq2ps_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtdq2ps128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71267,7 +71948,8 @@ def int_x86_avx512_mask_cvtdq2ps_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvtdq2ps_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvtdq2ps_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtdq2ps256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71305,7 +71987,8 @@ def int_x86_avx512_mask_cvtpd2dq_128 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvtpd2dq_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvtpd2dq_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtpd2dq256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71343,7 +72026,8 @@ def int_x86_avx512_mask_cvtpd2ps {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvtpd2ps_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvtpd2ps_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtpd2ps256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71524,7 +72208,8 @@ def int_x86_avx512_mask_cvtps2dq_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvtps2pd_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvtps2pd_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtps2pd128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71536,7 +72221,8 @@ def int_x86_avx512_mask_cvtps2pd_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvtps2pd_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvtps2pd_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvtps2pd256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71795,7 +72481,8 @@ def int_x86_avx512_mask_cvttpd2dq_128 {	// GCCBuiltin SDPatternOperator Intrinsi
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvttpd2dq_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvttpd2dq_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvttpd2dq256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71937,7 +72624,8 @@ def int_x86_avx512_mask_cvttpd2uqq_512 {	// GCCBuiltin SDPatternOperator Intrins
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvttps2dq_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvttps2dq_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvttps2dq128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -71949,7 +72637,8 @@ def int_x86_avx512_mask_cvttps2dq_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_cvttps2dq_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_cvttps2dq_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_cvttps2dq256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73339,7 +74028,8 @@ def int_x86_avx512_mask_mul_ss_round {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_padds_b_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_padds_b_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddsb128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73351,7 +74041,8 @@ def int_x86_avx512_mask_padds_b_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_padds_b_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_padds_b_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddsb256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73376,7 +74067,8 @@ def int_x86_avx512_mask_padds_b_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_padds_w_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_padds_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddsw128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73388,7 +74080,8 @@ def int_x86_avx512_mask_padds_w_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_padds_w_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_padds_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddsw256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73413,7 +74106,8 @@ def int_x86_avx512_mask_padds_w_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_paddus_b_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_paddus_b_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddusb128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73425,7 +74119,8 @@ def int_x86_avx512_mask_paddus_b_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_paddus_b_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_paddus_b_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddusb256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73450,7 +74145,8 @@ def int_x86_avx512_mask_paddus_b_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_paddus_w_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_paddus_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddusw128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73462,7 +74158,8 @@ def int_x86_avx512_mask_paddus_w_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_paddus_w_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_paddus_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_paddusw256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73617,7 +74314,8 @@ def int_x86_avx512_mask_permvar_qi_512 {	// GCCBuiltin SDPatternOperator Intrins
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_permvar_sf_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_permvar_sf_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_permvarsf256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73642,7 +74340,8 @@ def int_x86_avx512_mask_permvar_sf_512 {	// GCCBuiltin SDPatternOperator Intrins
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_permvar_si_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_permvar_si_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_permvarsi256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73667,7 +74366,8 @@ def int_x86_avx512_mask_permvar_si_512 {	// GCCBuiltin SDPatternOperator Intrins
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_pmaddubs_w_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_pmaddubs_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmaddubsw128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73679,7 +74379,8 @@ def int_x86_avx512_mask_pmaddubs_w_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_pmaddubs_w_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_pmaddubs_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmaddubsw256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73704,7 +74405,8 @@ def int_x86_avx512_mask_pmaddubs_w_512 {	// GCCBuiltin SDPatternOperator Intrins
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_pmaddw_d_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_pmaddw_d_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmaddwd128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -73716,7 +74418,8 @@ def int_x86_avx512_mask_pmaddw_d_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_pmaddw_d_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_pmaddw_d_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmaddwd256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75145,6 +75848,123 @@ def int_x86_avx512_mask_pmovus_wb_mem_512 {	// GCCBuiltin SDPatternOperator Intr
   bit isTarget = 0;
   string NAME = ?;
 }
+def int_x86_avx512_mask_pmul_hr_sw_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhrsw128_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v8i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v8i16_ty, llvm_i8_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmul_hr_sw_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhrsw256_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v16i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16i16_ty, llvm_v16i16_ty, llvm_v16i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmul_hr_sw_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhrsw512_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v32i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v32i16_ty, llvm_v32i16_ty, llvm_v32i16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmulh_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhw128_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v8i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v8i16_ty, llvm_i8_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmulh_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhw256_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v16i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16i16_ty, llvm_v16i16_ty, llvm_v16i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmulh_w_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhw512_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v32i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v32i16_ty, llvm_v32i16_ty, llvm_v32i16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmulhu_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhuw128_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v8i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v8i16_ty, llvm_i8_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmulhu_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhuw256_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v16i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v16i16_ty, llvm_v16i16_ty, llvm_v16i16_ty, llvm_i16_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
+def int_x86_avx512_mask_pmulhu_w_512 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_pmulhuw512_mask";
+  string Intrinsic:name = "";
+  list<SDNodeProperty> Intrinsic:sd_properties = [];
+  list<SDNodeProperty> Properties = [];
+  string LLVMName = "";
+  string TargetPrefix = "x86";
+  list<LLVMType> RetTypes = [llvm_v32i16_ty];
+  list<LLVMType> ParamTypes = [llvm_v32i16_ty, llvm_v32i16_ty, llvm_v32i16_ty, llvm_i32_ty];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
+  bit isTarget = 0;
+  string NAME = ?;
+}
 def int_x86_avx512_mask_pmultishift_qb_128 {	// GCCBuiltin SDPatternOperator Intrinsic
   string GCCBuiltinName = "__builtin_ia32_vpmultishiftqb128_mask";
   string Intrinsic:name = "";
@@ -75496,7 +76316,8 @@ def int_x86_avx512_mask_prorv_q_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubs_b_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubs_b_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubsb128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75508,7 +76329,8 @@ def int_x86_avx512_mask_psubs_b_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubs_b_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubs_b_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubsb256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75533,7 +76355,8 @@ def int_x86_avx512_mask_psubs_b_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubs_w_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubs_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubsw128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75545,7 +76368,8 @@ def int_x86_avx512_mask_psubs_w_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubs_w_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubs_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubsw256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75570,7 +76394,8 @@ def int_x86_avx512_mask_psubs_w_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubus_b_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubus_b_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubusb128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75582,7 +76407,8 @@ def int_x86_avx512_mask_psubus_b_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubus_b_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubus_b_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubusb256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75607,7 +76433,8 @@ def int_x86_avx512_mask_psubus_b_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubus_w_128 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubus_w_128 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubusw128_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -75619,7 +76446,8 @@ def int_x86_avx512_mask_psubus_w_128 {	// SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_avx512_mask_psubus_w_256 {	// SDPatternOperator Intrinsic
+def int_x86_avx512_mask_psubus_w_256 {	// GCCBuiltin SDPatternOperator Intrinsic
+  string GCCBuiltinName = "__builtin_ia32_psubusw256_mask";
   string Intrinsic:name = "";
   list<SDNodeProperty> Intrinsic:sd_properties = [];
   list<SDNodeProperty> Properties = [];
@@ -79060,45 +79888,6 @@ def int_x86_avx512_pmul_dq_512 {	// GCCBuiltin SDPatternOperator Intrinsic
   list<LLVMType> RetTypes = [llvm_v8i64_ty];
   list<LLVMType> ParamTypes = [llvm_v16i32_ty, llvm_v16i32_ty];
   list<IntrinsicProperty> IntrProperties = [IntrNoMem];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_x86_avx512_pmul_hr_sw_512 {	// GCCBuiltin SDPatternOperator Intrinsic
-  string GCCBuiltinName = "__builtin_ia32_pmulhrsw512";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v32i16_ty];
-  list<LLVMType> ParamTypes = [llvm_v32i16_ty, llvm_v32i16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_x86_avx512_pmulh_w_512 {	// GCCBuiltin SDPatternOperator Intrinsic
-  string GCCBuiltinName = "__builtin_ia32_pmulhw512";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v32i16_ty];
-  list<LLVMType> ParamTypes = [llvm_v32i16_ty, llvm_v32i16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
-  bit isTarget = 0;
-  string NAME = ?;
-}
-def int_x86_avx512_pmulhu_w_512 {	// GCCBuiltin SDPatternOperator Intrinsic
-  string GCCBuiltinName = "__builtin_ia32_pmulhuw512";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_v32i16_ty];
-  list<LLVMType> ParamTypes = [llvm_v32i16_ty, llvm_v32i16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -83097,19 +83886,6 @@ def int_x86_rdgsbase_64 {	// GCCBuiltin SDPatternOperator Intrinsic
   bit isTarget = 0;
   string NAME = ?;
 }
-def int_x86_rdpid {	// GCCBuiltin SDPatternOperator Intrinsic
-  string GCCBuiltinName = "__builtin_ia32_rdpid";
-  string Intrinsic:name = "";
-  list<SDNodeProperty> Intrinsic:sd_properties = [];
-  list<SDNodeProperty> Properties = [];
-  string LLVMName = "";
-  string TargetPrefix = "x86";
-  list<LLVMType> RetTypes = [llvm_i32_ty];
-  list<LLVMType> ParamTypes = [];
-  list<IntrinsicProperty> IntrProperties = [];
-  bit isTarget = 0;
-  string NAME = ?;
-}
 def int_x86_rdpkru {	// GCCBuiltin SDPatternOperator Intrinsic
   string GCCBuiltinName = "__builtin_ia32_rdpkru";
   string Intrinsic:name = "";
@@ -86730,7 +87506,7 @@ def int_x86_xop_vpmacsdd {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4i32_ty];
   list<LLVMType> ParamTypes = [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v4i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86743,7 +87519,7 @@ def int_x86_xop_vpmacsdqh {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v2i64_ty];
   list<LLVMType> ParamTypes = [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v2i64_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86756,7 +87532,7 @@ def int_x86_xop_vpmacsdql {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v2i64_ty];
   list<LLVMType> ParamTypes = [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v2i64_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86769,7 +87545,7 @@ def int_x86_xop_vpmacssdd {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4i32_ty];
   list<LLVMType> ParamTypes = [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v4i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86782,7 +87558,7 @@ def int_x86_xop_vpmacssdqh {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v2i64_ty];
   list<LLVMType> ParamTypes = [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v2i64_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86795,7 +87571,7 @@ def int_x86_xop_vpmacssdql {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v2i64_ty];
   list<LLVMType> ParamTypes = [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v2i64_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86808,7 +87584,7 @@ def int_x86_xop_vpmacsswd {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4i32_ty];
   list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v4i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86821,7 +87597,7 @@ def int_x86_xop_vpmacssww {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v8i16_ty];
   list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v8i16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86834,7 +87610,7 @@ def int_x86_xop_vpmacswd {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4i32_ty];
   list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v4i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86847,7 +87623,7 @@ def int_x86_xop_vpmacsww {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v8i16_ty];
   list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v8i16_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86860,7 +87636,7 @@ def int_x86_xop_vpmadcsswd {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4i32_ty];
   list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v4i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -86873,7 +87649,7 @@ def int_x86_xop_vpmadcswd {	// GCCBuiltin SDPatternOperator Intrinsic
   string TargetPrefix = "x86";
   list<LLVMType> RetTypes = [llvm_v4i32_ty];
   list<LLVMType> ParamTypes = [llvm_v8i16_ty, llvm_v8i16_ty, llvm_v4i32_ty];
-  list<IntrinsicProperty> IntrProperties = [IntrNoMem, Commutative];
+  list<IntrinsicProperty> IntrProperties = [IntrNoMem];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87301,7 +88077,7 @@ def int_xcore_chkct {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_309];
+  list<IntrinsicProperty> IntrProperties = [anonymous_308];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87325,7 +88101,7 @@ def int_xcore_clrpt {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_317];
+  list<IntrinsicProperty> IntrProperties = [anonymous_316];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87374,7 +88150,7 @@ def int_xcore_edu {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_324];
+  list<IntrinsicProperty> IntrProperties = [anonymous_323];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87386,7 +88162,7 @@ def int_xcore_eeu {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_323];
+  list<IntrinsicProperty> IntrProperties = [anonymous_322];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87398,7 +88174,7 @@ def int_xcore_endin {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_331];
+  list<IntrinsicProperty> IntrProperties = [anonymous_330];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87410,7 +88186,7 @@ def int_xcore_freer {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_302];
+  list<IntrinsicProperty> IntrProperties = [anonymous_301];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87488,7 +88264,7 @@ def int_xcore_getst {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_anyptr_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_332];
+  list<IntrinsicProperty> IntrProperties = [anonymous_331];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87500,7 +88276,7 @@ def int_xcore_getts {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_318];
+  list<IntrinsicProperty> IntrProperties = [anonymous_317];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87512,7 +88288,7 @@ def int_xcore_in {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_303];
+  list<IntrinsicProperty> IntrProperties = [anonymous_302];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87524,7 +88300,7 @@ def int_xcore_inct {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_305];
+  list<IntrinsicProperty> IntrProperties = [anonymous_304];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87536,7 +88312,7 @@ def int_xcore_initcp {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_338];
+  list<IntrinsicProperty> IntrProperties = [anonymous_337];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87548,7 +88324,7 @@ def int_xcore_initdp {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_339];
+  list<IntrinsicProperty> IntrProperties = [anonymous_338];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87560,7 +88336,7 @@ def int_xcore_initlr {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_337];
+  list<IntrinsicProperty> IntrProperties = [anonymous_336];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87572,7 +88348,7 @@ def int_xcore_initpc {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_336];
+  list<IntrinsicProperty> IntrProperties = [anonymous_335];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87584,7 +88360,7 @@ def int_xcore_initsp {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_335];
+  list<IntrinsicProperty> IntrProperties = [anonymous_334];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87596,7 +88372,7 @@ def int_xcore_inshr {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_314];
+  list<IntrinsicProperty> IntrProperties = [anonymous_313];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87608,7 +88384,7 @@ def int_xcore_int {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_304];
+  list<IntrinsicProperty> IntrProperties = [anonymous_303];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87620,7 +88396,7 @@ def int_xcore_mjoin {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_334];
+  list<IntrinsicProperty> IntrProperties = [anonymous_333];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87632,7 +88408,7 @@ def int_xcore_msync {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_333];
+  list<IntrinsicProperty> IntrProperties = [anonymous_332];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87644,7 +88420,7 @@ def int_xcore_out {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_306];
+  list<IntrinsicProperty> IntrProperties = [anonymous_305];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87656,7 +88432,7 @@ def int_xcore_outct {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_308];
+  list<IntrinsicProperty> IntrProperties = [anonymous_307];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87668,7 +88444,7 @@ def int_xcore_outshr {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_315];
+  list<IntrinsicProperty> IntrProperties = [anonymous_314];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87680,7 +88456,7 @@ def int_xcore_outt {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_307];
+  list<IntrinsicProperty> IntrProperties = [anonymous_306];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87692,7 +88468,7 @@ def int_xcore_peek {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_330];
+  list<IntrinsicProperty> IntrProperties = [anonymous_329];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87704,7 +88480,7 @@ def int_xcore_setc {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_313];
+  list<IntrinsicProperty> IntrProperties = [anonymous_312];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87716,7 +88492,7 @@ def int_xcore_setclk {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_325, anonymous_326];
+  list<IntrinsicProperty> IntrProperties = [anonymous_324, anonymous_325];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87728,7 +88504,7 @@ def int_xcore_setd {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_312];
+  list<IntrinsicProperty> IntrProperties = [anonymous_311];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87740,7 +88516,7 @@ def int_xcore_setev {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_322];
+  list<IntrinsicProperty> IntrProperties = [anonymous_321];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87766,7 +88542,7 @@ def int_xcore_setpsc {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_329];
+  list<IntrinsicProperty> IntrProperties = [anonymous_328];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87778,7 +88554,7 @@ def int_xcore_setpt {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_316];
+  list<IntrinsicProperty> IntrProperties = [anonymous_315];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87790,7 +88566,7 @@ def int_xcore_setrdy {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_327, anonymous_328];
+  list<IntrinsicProperty> IntrProperties = [anonymous_326, anonymous_327];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87815,7 +88591,7 @@ def int_xcore_settw {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_i32_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_320];
+  list<IntrinsicProperty> IntrProperties = [anonymous_319];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87827,7 +88603,7 @@ def int_xcore_setv {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty, llvm_ptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_321];
+  list<IntrinsicProperty> IntrProperties = [anonymous_320];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87864,7 +88640,7 @@ def int_xcore_syncr {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_319];
+  list<IntrinsicProperty> IntrProperties = [anonymous_318];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87876,7 +88652,7 @@ def int_xcore_testct {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_310];
+  list<IntrinsicProperty> IntrProperties = [anonymous_309];
   bit isTarget = 0;
   string NAME = ?;
 }
@@ -87888,7 +88664,7 @@ def int_xcore_testwct {	// SDPatternOperator Intrinsic
   string TargetPrefix = "xcore";
   list<LLVMType> RetTypes = [llvm_i32_ty];
   list<LLVMType> ParamTypes = [llvm_anyptr_ty];
-  list<IntrinsicProperty> IntrProperties = [anonymous_311];
+  list<IntrinsicProperty> IntrProperties = [anonymous_310];
   bit isTarget = 0;
   string NAME = ?;
 }
