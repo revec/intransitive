@@ -4,6 +4,7 @@ python-Levenshtein
 tqdm
 
 # Development requirements
+autopep8
 ipython
 pylint
 rope
