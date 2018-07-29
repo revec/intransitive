@@ -16,10 +16,9 @@ logger.setLevel(logging.DEBUG)
 
 def make_map_source(conversions):
     # date = datetime.date.today().strftime("%B %d, %Y")
-
     with open("templates/IntrinsicConversion.h.tmpl", "r") as template_f:
         template = Template(template_f.read())
-    
+
     output_conversions = format_conversions_all(conversions)
     source = template.render(lane_widening_conversions=output_conversions)
     return source
@@ -27,8 +26,9 @@ def make_map_source(conversions):
 def format_conversions_all(conversions):
     # Load a list of intrinsic IDs that appear to be removed
     # from the llvm::Intrinsic namespace
+    # TODO: move this find_identical_intrinsics.py
     removed_intrinsics = set()
-    with open("templates/removed_intrinsics.txt", "r") as id_f:
+    with open("data/removed_intrinsics.txt", "r") as id_f:
         for IID in id_f:
             removed_intrinsics.add(IID.strip())
 
