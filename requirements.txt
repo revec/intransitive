@@ -1,5 +1,6 @@
 colorama
 coloredlogs
+jinja2
 python-Levenshtein
 tqdm
 

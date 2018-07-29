@@ -25,6 +25,13 @@ def make_map_source(conversions):
     return source
 
 def format_conversions_all(conversions):
+    # Load a list of intrinsic IDs that appear to be removed
+    # from the llvm::Intrinsic namespace
+    removed_intrinsics = set()
+    with open("templates/removed_intrinsics.txt", "r") as id_f:
+        for IID in id_f:
+            removed_intrinsics.add(IID.strip())
+
     # Collect targets for each source configuration
     collected = defaultdict(set)
     for base, target in conversions:
@@ -35,15 +42,22 @@ def format_conversions_all(conversions):
             logger.warn("    Base: %s", base)
             logger.warn("  Target: %s", target)
             continue
+
         if target["repeat"] != 1:
             logger.warn(
                 "Revectorizer only can perform k-to-1 intrinsic call conversions, but target %s has higher repeat", target)
             continue
-
+        
         # Remove int_ prefix from IDs
         base_key = base["id"].partition("int_")[2]
         target_key = target["id"].partition("int_")[2]
         assert base_key != target_key
+
+        if base_key in removed_intrinsics or target_key in removed_intrinsics:
+            logger.warn("Skipping conversion with removed intrinsic(s):")
+            logger.warn("    Base: %s", base)
+            logger.warn("  Target: %s", target)
+            continue
 
         VF = base["repeat"]
         collected[base_key].add((VF, target_key))

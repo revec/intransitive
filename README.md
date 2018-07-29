@@ -27,10 +27,14 @@ python generate_intrinsic_map.py
 ```
 
 ### Updating IntrinsicRecords.td
-If needed, IntrinsicRecords.td can be regenerated from intrinsic definitions in the LLVM source. From the root of the LLVM source repository (e.g. a clone of https://github.com/llvm-mirror/llvm), execute:
-
+If needed, IntrinsicRecords.td can be regenerated from intrinsic definitions in the LLVM source. This is necessary when intrinsic definitions in the LLVM source change -- particularly when `include/llvm/IR/Intrinsics.td` or `include/llvm/IR/IntrinsicsX86.td` change. From the root of the LLVM source repository (e.g. a clone of https://github.com/llvm-mirror/llvm), execute:
 ```
 llvm-tblgen include/llvm/IR/Intrinsics.td -Iinclude > /path/to/output/IntrinsicRecords.td
+```
+
+For example,
+```
+/mnt/revec/build-master/bin/llvm-tblgen include/llvm/IR/Intrinsics.td -Iinclude > ../enum/IntrinsicRecords.td
 ```
 
 This repository currently contains definitions generated from LLVM's `release_60` branch.
