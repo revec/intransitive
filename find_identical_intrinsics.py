@@ -101,14 +101,23 @@ def refine_equivalences(equivalences, candidate_equivalences):
                       are currently thought to be equivalent.
         candidate_equivalences: list of sets. Proposed equivalence sets.
     """
-    for candidate_set in candidate_equivalences:
-        for instruction in list(candidate_set):
+    for candidate_equivalence_list in candidate_equivalences:
+        candidate_equivalence_set = set(candidate_equivalence_list)
+        for instruction in candidate_equivalence_set:
+            #if instruction == "tests/int_x86_sse_rcp_ss/combo_VERTICAL/repeat_1/testbed":
+            #    pdb.set_trace()
+
             if instruction in equivalences:
                 # Refine equivalence set
-                equivalences[instruction].intersection_update(candidate_set)
+                #equivalences[instruction].intersection_update(candidate_set)
+                equivalences[instruction]["targets"] = equivalences[instruction]["targets"] & candidate_equivalence_set
+                equivalences[instruction]["num_tests"] += 1
             else:
                 # First time we've seen this - set the equiv set
-                equivalences[instruction] = set(candidate_set)
+                equivalences[instruction] = {
+                    "targets": set(candidate_equivalence_set),
+                    "num_tests": 1
+                }
 
 
 def filter_ucomi(conversions):
@@ -186,6 +195,11 @@ def filter_differing_arguments(conversions):
         intrinsics = json.load(intrinsics_f)
 
     for conversion in conversions:
+        if conversion[0].id not in intrinsics or conversion[1].id not in intrinsics:
+            logger.warn("Conversion found, but IID not present in intrinsics_all.json:")
+            logger.warn("  %s => %s", conversion[0], conversion[1])
+            continue
+
         params0 = intrinsics[conversion[0].id]["ParamTypes"]
         params1 = intrinsics[conversion[1].id]["ParamTypes"]
 
@@ -320,20 +334,28 @@ if __name__=="__main__":
     equivalences = {}
     for log_equivalences in all_log_equivalences:
         refine_equivalences(equivalences, log_equivalences)
+        #count = sum(map(len, equivalences.values()))
+        #logger.info("REFINED equivalences {:6}".format(count))
 
     final_count = sum(map(len, equivalences.values()))
     logger.info("REFINED equivalences {:6}".format(final_count))
 
     # Remove duplicate equivalence sets
     equivalences_dedup = set()
-    for equiv_set in equivalences.values():
-        equiv_set = frozenset(equiv_set)
+    for equivs in equivalences.values():
+        if equivs["num_tests"] < len(args.log):
+            logger.warn("Equivalences {} have not been tested {} times, skipping".format(equivs, len(args.log)))
+            continue
+
+        equiv_set = frozenset(equivs["targets"])
         equivalences_dedup.add(equiv_set)
 
     # Convert sets into lists, find missed instructions
     equivalence_lists = []  # Elements are lists of equivalent testbeds
     missed_list = []
     for equiv_set in equivalences_dedup:
+        #if "tests/int_x86_sse_rcp_ss/combo_VERTICAL/repeat_1/testbed" in equiv_set:
+        #    pdb.set_trace()
         if len(equiv_set) > 1:
             equiv_list = list(equiv_set)
             equiv_list.sort()
