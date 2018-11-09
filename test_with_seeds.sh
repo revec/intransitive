@@ -7,7 +7,7 @@ for seed in $(seq $1 $2); do
     # tests directory.
     rm -rf tests
     python3 generate_tests.py --seed $seed
-    make testbeds
+    make testbeds LLC=/mnt/revec/build-master-rel-alltarget/bin/llc
 
     mkdir -p logs
     make run-testbeds > logs/testbeds_seed$seed.log
