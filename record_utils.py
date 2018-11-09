@@ -12,6 +12,7 @@ intel_vector_sets = [
     "sse",
     "sse2",
     "sse3",
+    "ssse3",
     "sse41",
     "sse42",
     "avx",
