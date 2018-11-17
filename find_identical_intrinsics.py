@@ -168,7 +168,7 @@ def filter_high_repetitions(conversions):
 
 def order_pairs(conversions):
     """Order conversion tuples: (source_config, target_config)"""
-    ordered_instruction_sets = ["sse", "sse2", "sse3", "sse41", "avx", "avx2", "fma", "avx512"]
+    ordered_instruction_sets = ["sse", "sse2", "sse3", "ssse3", "sse41", "avx", "avx2", "fma", "avx512"]
 
     for conversion in conversions:
         a, b = conversion
@@ -377,8 +377,8 @@ if __name__=="__main__":
     logger.info("Found {} conversions".format(len(conversions)))
     for conversion in conversions:
         VF = conversion[0].repeat / conversion[1].repeat
-        if "psrl_q" in conversion[0].id:
-            logger.info("  VF: {}, {} => {}".format(VF, *conversion))
+        if "ssse3" in conversion[0].id or "ssse3" in conversion[1].id:
+             logger.info("  VF: {}, {} => {}".format(VF, *conversion))
 
     with open(os.path.join(args.output_folder, "test_conversions.json"), "w") as conversions_f:
         serialize_conversions(conversions, conversions_f)
