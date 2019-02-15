@@ -1,6 +1,10 @@
-# LLVM Intrinsic Translation
+# Intransitive: Discovering intrinsic translations
 
-Generate peephole rules to collapse intrinsics in LLVM IR, particularly for vector intrinsics.
+Generate rules to collapse sequences of LLVM vector IR intrinsics into shorter sequences of equivalent (wider) operations. This is done via testbed generation, randomized testing of input bit sequences, and testing with combinatorially generated corner-case bit sequences.
+
+We tested 18,000 such inputs on an Intel Skylake Xeon processor with AVX-512 support. In our tests, Intransitive discovered 53 SSE-series to AVX1/2 intrinsic conversions, 33 AVX1/2 to AVX-512 conversions, and 19 SSE-series to AVX-512 conversions. For instance, the SSE4.1 intrinsic `_mm_packus_epi32` has a 2-to-1 conversion to `_mm256_packus_epi32` and a 4-to-1 conversion to `_mm512_packus_epi32`.
+
+See [Revec: Program Rejuventation through Revectorization](https://arxiv.org/pdf/1902.02816.pdf) for details on the equivalence generation process.
 
 ## Generation process:
 ### Set up a virtual environment
@@ -38,13 +42,3 @@ For example,
 ```
 
 This repository currently contains definitions generated from LLVM's `release_60` branch.
-
-## Old instructions (for a single seed)
-```
-export ENUM_SEED=02139
-rm -r tests
-python3 generate_tests.py --seed $ENUM_SEED
-make testbeds
-make run-testbeds > testbeds_seed$ENUM_SEED.log
-python3 generate_intrinsic_map.py
-```
